@@ -17,7 +17,9 @@ public class Scoreboard {
 
         Random rnd = new Random();
 
-        for (int i = 1; i <= 150; i++ ) {
+        int[] scores = {34,12,3,45,67,33,11,10,9,4,5,2,1,77,5};
+
+        for (int i = 0; i < 50; i++ ) {
             e = new GameEntry("Name_" + i, rnd.nextInt(100));
             scoreboard.add(e);
         }
@@ -72,7 +74,7 @@ public class Scoreboard {
         } 
         else if (numOfEntries < MAX_SCORES || e.score < highScore() && e.score >= lowScore() ){
 
-            while (pointer.element.score > e.score){
+            while (pointer != tail && pointer.next.element.score > e.score){
                 pointer = pointer.next;
             }
             //Replacing the tail is a special case.
@@ -149,7 +151,9 @@ public class Scoreboard {
     // update methods
     // Adds a new Node to Head. If Tail is null, it is also set to Head.
     public Node addFirst(GameEntry e) {
-        head = new Node(e, head);
+        Node newNode = new Node(e,head);
+        newNode.next = head;
+        head = newNode;
         if (numOfEntries == 0) {
             tail = head;
         }
