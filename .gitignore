@@ -2,3 +2,5 @@ cs501/*.class
 cs501/Scoreboard.class
 cs501/Scoreboard$GameEntry.class
 cs501/Scoreboard$Node.class
+cs501/Scoreboard$GameEntry.class
+cs501/Scoreboard$Node.class
