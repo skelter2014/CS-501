@@ -19,9 +19,10 @@ public class Scoreboard {
 
     public static void main(String[] args) {
 
+        //Create an array to hold multiple test sets~~
         Tester[] testSet = new Tester[7];
         
-        //unsorted scores with duplicate in the middle
+        //unsorted scores with duplicate in the middle - 
         Tester test0 = new Tester(new int[]{34,12,3,55,45,68,33,11,10,9,4,5,2,1,77,5,55,2,67,39,20});
         testSet[0] = test0;
         
@@ -41,11 +42,11 @@ public class Scoreboard {
         Tester test4 = new Tester(new int[]{34,12,77,55,45,68,33,11,10,33,20,5,2,1,77,5,55,2,39,20});
         testSet[4] = test4;
 
-        // unsorted all duplicate scores>
+        // unsorted all duplicate scores 
         Tester test5 = new Tester(new int[]{10,10,10,10,10});
         testSet[5] = test5;
 
-        // unsorted all zero scores>
+        // unsorted all zero scores
         Tester test6 = new Tester(new int[]{0,0,0,0,0});
         testSet[6] = test6;
 
