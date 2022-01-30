@@ -2,60 +2,96 @@ package cs501;
 
 import java.util.Random;
 
+/**
+ * A Scoreboard class to store the top 10 GameEntry scores in Reverse order highest to lowest.
+ * Assuming a non-empty list, the head always points to the highest score and the tail always points to 
+ * lowest score. If there is only one GameEntry in the list, the head and tail point to the same object.
+ * 
+ * A more recent score will be placed higher in the scoreboard if it is equal to a prior score.
+ */
 public class Scoreboard {
-    private int currentLow;
-    static final int MAX_SCORES = 10;
-    private int numOfEntries;
+    static final int MAX_ENTRIES = 10;
+
     // instance variables
+    private int numOfEntries;
     private Node head;
     private Node tail;
 
     public static void main(String[] args) {
-        Scoreboard scoreboard = new Scoreboard();
 
-        GameEntry e;
+        Tester[] testSet = new Tester[7];
+        
+        //unsorted scores with duplicate in the middle
+        Tester test0 = new Tester(new int[]{34,12,3,55,45,68,33,11,10,9,4,5,2,1,77,5,55,2,67,39,20});
+        testSet[0] = test0;
+        
+        // unsorted scores <less than 10>, no order
+        Tester test1 = new Tester(new int[]{5,55,2,67,39,20});
+        testSet[1] = test1;
+        
+        // presorted scores <less than 10 ASC order>
+        Tester test2 = new Tester(new int[]{1,2,3,4,5,6});
+        testSet[2] = test2;
+        
+        // presorted scores <greater than 10 DEC>
+        Tester test3 = new Tester(new int[]{11,10,9,8,7,6,5,4,3,2,1});
+        testSet[3] = test3;
 
-        Random rnd = new Random();
+        //unsorted scores with duplicate on the ends
+        Tester test4 = new Tester(new int[]{34,12,77,55,45,68,33,11,10,33,20,5,2,1,77,5,55,2,39,20});
+        testSet[4] = test4;
 
-        int[] scores = {34,12,3,45,67,33,11,10,9,4,5,2,1,77,5};
+        // unsorted all duplicate scores>
+        Tester test5 = new Tester(new int[]{10,10,10,10,10});
+        testSet[5] = test5;
 
-        for (int i = 0; i < 50; i++ ) {
-            e = new GameEntry("Name_" + i, rnd.nextInt(100));
-            scoreboard.add(e);
+        // unsorted all zero scores>
+        Tester test6 = new Tester(new int[]{0,0,0,0,0});
+        testSet[6] = test6;
+
+        //Iterate through the set of testData
+        for (Tester tester : testSet) {
+            tester.Test();
         }
-        displayScores(scoreboard);
-        scoreboard.add(new GameEntry("sample entry", 4));
-        displayScores(scoreboard);
-
     }
 
-    /**
-     * Shifts the board to the right n entries. Entries at the end of the list wrap
-     * around to the head effectively
-     * sorting the list in reverse order
-     */
-    // private static void shiftBoardRight(Scoreboard scoreboard) {
-    //     Node ptr = scoreboard.head;
-    //     for (int i = 1; i <= scoreboard.numOfEntries - 5; i++) {
-    //         scoreboard.removeFirst();
-    //         scoreboard.addLast(ptr.element);
-    //         ptr = ptr.next;
-    //     }
-    // }
+    /**A custom class to run various testing scenarios and print them to the console */
+    private static class Tester{
+        private int[] testData ;
+        public Tester(int[] data){
+            this.testData = data;
+        }
+        public void Test(){
+            Scoreboard scoreboard = new Scoreboard();
+            GameEntry e;
+    
+            for (int i = 0; i < testData.length; i++ ) {
+                e = new GameEntry(String.format("Score#: %02d", i+1), testData[i]);
+                scoreboard.add(e);
+            }
+            displayScores(scoreboard);
+        }
+    }
 
+
+    /**A utility method to display the current scoreboard entries. */
     private static void displayScores(Scoreboard board) {
+        System.out.println("-------------------------------------------");
+        System.out.printf("\tHigh Score: %02d   Low Score: %02d\n", board.highScore(), board.lowScore());
+        System.out.println("-------------------------------------------");
         Node ptr = board.head;
         while (ptr != null) {
             System.out.println(ptr.element);
             ptr = ptr.next;
         }
-        System.out.println("---------------");
 
     }
 
+    /**Returns the current low score on the scoreboard */
     private int lowScore() {
         return tail != null ? tail.element.score : 0;
     }
+    /**Returns the current high score on the scoreboard */
     private int highScore(){
         return head!=null ? head.element.score : 0;
     }
@@ -64,16 +100,15 @@ public class Scoreboard {
      * are stored in Descending order by score. 
      */
     public void add(GameEntry e) {
-        if (head == null) {
+        //if the list is empty or the score higher than the high score, insert at the front.
+        if ( head == null || e.score >= highScore() ) {
             addFirst(e);
-            return;
         }
-        Node pointer = head;
-        if (e.score > highScore() ){
-            addFirst(e);
-        } 
-        else if (numOfEntries < MAX_SCORES || e.score < highScore() && e.score >= lowScore() ){
+        //check to see if the score board is not full or if the score is higher than the low score
+        else if (numOfEntries < MAX_ENTRIES || e.score >= lowScore() ) {
 
+            Node pointer = head;
+            //Walk the entire list. Check the 
             while (pointer != tail && pointer.next.element.score > e.score){
                 pointer = pointer.next;
             }
@@ -85,24 +120,20 @@ public class Scoreboard {
                 insertNode(pointer, e);
             }
             trimScoreBoard();
-
         }
-
-
-
-
     }
+    /**Trims the ScoreBoard to be of size MAX_SCORES */
     private void trimScoreBoard(){
-        if (numOfEntries > MAX_SCORES){
+        if (numOfEntries > MAX_ENTRIES){
             Node pointer = head;
 
-            for (int i=1; i < 10; i++ ){
+            for (int i=1; i < MAX_ENTRIES; i++ ){
                 pointer = pointer.next; //move the pointer til the end.
             }
 
             tail = pointer; //reset the tail 
             tail.next = null; // and chop off the rest
-            numOfEntries = MAX_SCORES; // reset back to the maximum
+            numOfEntries = MAX_ENTRIES; // reset back to the maximum
         }        
 
     }
@@ -119,7 +150,6 @@ public class Scoreboard {
     public Scoreboard() {
         // The scoreboard is currently empty and has no low (or high) scores.
         numOfEntries = 0;
-        currentLow = 0;
         head = null;
         tail = null;
 
@@ -148,9 +178,8 @@ public class Scoreboard {
         return tail.getElement();
     }
 
-    // update methods
-    // Adds a new Node to Head. If Tail is null, it is also set to Head.
-    public Node addFirst(GameEntry e) {
+    /**Adds a new node to the head of the list.  */
+    private Node addFirst(GameEntry e) {
         Node newNode = new Node(e,head);
         newNode.next = head;
         head = newNode;
@@ -158,10 +187,12 @@ public class Scoreboard {
             tail = head;
         }
         numOfEntries++;
+        trimScoreBoard();
         return head;
     }
 
-    public Node addLast(GameEntry e) {
+    /**Adds a new node to the end of the list.   */
+    private Node addLast(GameEntry e) {
         Node newest = new Node(e, null);
         if (isEmpty()) {
             head = newest;
@@ -171,6 +202,7 @@ public class Scoreboard {
         }
         tail = newest; // new node becomes the tail
         numOfEntries++;
+        trimScoreBoard();
         return tail;
     }
 
@@ -217,7 +249,7 @@ public class Scoreboard {
 
         /** Returns a formatted string representation of this entry. */
         public String toString() {
-            return "(" + name + ", " + score + ")";
+            return "(" + name + ":\t" + score + ")";
         }
 
     }
