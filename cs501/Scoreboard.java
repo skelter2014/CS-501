@@ -18,10 +18,10 @@ public class Scoreboard {
     private Node tail;
 
     public static void main(String[] args) {
-
         //Create an array to hold multiple test sets~~
         Tester[] testSet = new Tester[7];
-        
+
+        //#region Test Score Arrays
         //unsorted scores with duplicate in the middle - 
         Tester test0 = new Tester(new int[]{34,12,3,55,45,68,33,11,10,9,4,5,2,1,77,5,55,2,67,39,20});
         testSet[0] = test0;
@@ -49,32 +49,20 @@ public class Scoreboard {
         // unsorted all zero scores
         Tester test6 = new Tester(new int[]{0,0,0,0,0});
         testSet[6] = test6;
+        //#endregion Test Score Arrays
 
         //Iterate through the set of testData
         for (Tester tester : testSet) {
             tester.Test();
         }
     }
+    public Scoreboard() {
+        // The scoreboard is currently empty and has no low (or high) scores.
+        numOfEntries = 0;
+        head = null;
+        tail = null;
 
-    /**A custom class to run various testing scenarios and print them to the console */
-    private static class Tester{
-        private int[] testData ;
-        public Tester(int[] data){
-            this.testData = data;
-        }
-        public void Test(){
-            Scoreboard scoreboard = new Scoreboard();
-            GameEntry e;
-    
-            for (int i = 0; i < testData.length; i++ ) {
-                e = new GameEntry(String.format("Score#: %02d", i+1), testData[i]);
-                scoreboard.add(e);
-            }
-            displayScores(scoreboard);
-        }
     }
-
-
     /**A utility method to display the current scoreboard entries. */
     private static void displayScores(Scoreboard board) {
         System.out.println("-------------------------------------------");
@@ -148,13 +136,6 @@ public class Scoreboard {
         }        
     }
 
-    public Scoreboard() {
-        // The scoreboard is currently empty and has no low (or high) scores.
-        numOfEntries = 0;
-        head = null;
-        tail = null;
-
-    }
 
     // access methods
     public int size() {
@@ -220,7 +201,8 @@ public class Scoreboard {
 
     }
 
-    static class GameEntry {
+    //#region - additional solution classes
+    private static class GameEntry {
         private String name;
         private int score;
 
@@ -250,11 +232,10 @@ public class Scoreboard {
 
         /** Returns a formatted string representation of this entry. */
         public String toString() {
-            return "(" + name + ":\t" + score + ")";
+            return String.format("%s :\t %02d", name, score);
         }
 
     }
-
     // nested Node Class
     private static class Node {
         private GameEntry element;
@@ -277,5 +258,23 @@ public class Scoreboard {
             next = n;
         }
     }
-
+    /**A custom class to run various testing scenarios and print them to the console */
+    private static class Tester{
+        private int[] testData ;
+        public Tester(int[] data){
+            this.testData = data;
+        }
+        public void Test(){
+            Scoreboard scoreboard = new Scoreboard();
+            GameEntry e;
+    
+            //load the scoreboard with the testData[] scores
+            for (int i = 0; i < testData.length; i++ ) {
+                e = new GameEntry(String.format("Score#: %02d", i+1), testData[i]);
+                scoreboard.add(e);
+            }
+            displayScores(scoreboard);
+        }
+    }
+    //#endregion
 }
