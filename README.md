@@ -5,3 +5,4 @@ Data Structures and Algorithms in Java 6th Edition Goodrich, Tamassia, Goldwasse
 ISBN-13: 978-1118771334
 ISBN-10: 1118771338
 
+The folder /cs501 contains homework submissions for the Spring of 2022
