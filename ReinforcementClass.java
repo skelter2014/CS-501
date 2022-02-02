@@ -12,10 +12,12 @@ public class ReinforcementClass {
 
     public static void main(String[] args) {
         ReinforcementClass tester = new ReinforcementClass();
-        tester.inputAllBaseTypes();
+        //tester.inputAllBaseTypes();
 
         System.out.println("Number 3 is odd: " + ReinforcementClass.isOdd(3));
         System.out.println("Number 4 is odd: " + ReinforcementClass.isOdd(4));
+
+        System.out.println(ReinforcementClass.repeat1('a', 1000000));
 
     }
 
@@ -57,4 +59,25 @@ public class ReinforcementClass {
 
     }
 
+    /**Fragment 4.4 */
+    public static String repeat1(char c, int n) {
+        String answer = "";
+        for(int i=0; i<n; i++){
+            answer += c;
+        }
+        return answer;
+    }
+    public static boolean disjoint1(int[] groupA, int[] groupB, int[] groupC){
+        for(int a: groupA){
+            for(int b: groupB){
+                for(int c:groupC){
+                    if ((a==b) && (b==c)){
+                        return false;
+                    }
+                }
+            }
+
+        }
+        return true;
+    }
 }
