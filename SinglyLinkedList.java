@@ -25,6 +25,10 @@ public class SinglyLinkedList<E> {
             list.addNewScore(new GameEntry("Score_" + (i + 1), a[i]));
         }
 
+        for(int i=a.length; i>1; i--){
+            list.removeNode(i);
+        }
+
         System.out.println("--------------------------------------------------------");
         System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
         System.out.println("--------------------------------------------------------");
@@ -35,9 +39,9 @@ public class SinglyLinkedList<E> {
             pointer = pointer.next;
         }
 
-        list.removeNode(1);
-        list.removeNode(9);
-        list.removeNode(3);
+        // list.removeNode(1);
+        // list.removeNode(9);
+        // list.removeNode(3);
 
         System.out.println("--------------------------------------------------------");
         System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
@@ -65,7 +69,7 @@ public class SinglyLinkedList<E> {
             Node<E> pointer = head.next;
             int j = 2;
 
-            while (i != j + 1 && pointer.next != tail) {
+            while (i > j + 1 ) {
                 pointer = pointer.next;
                 j++;
             }
@@ -74,8 +78,9 @@ public class SinglyLinkedList<E> {
             } else {
                 pointer.next = pointer.next.next;
             }
+            size--;
         }
-
+        
     }
 
     /** Adds a new score node to the list in the proper position */
@@ -118,6 +123,7 @@ public class SinglyLinkedList<E> {
         }
         ptr.next = null;
         tail = ptr;
+        size--;
     }
 
     // access methods
