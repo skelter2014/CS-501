@@ -25,36 +25,62 @@ public class SinglyLinkedList<E> {
             list.addNewScore(new GameEntry("Score_" + (i + 1), a[i]));
         }
 
-        for(int i=a.length; i>1; i--){
-            list.removeNode(i);
-        }
+        // for (int i = a.length; i >= 1; i--) {
+        //     list.removeNode(i);
+        // }
 
-        System.out.println("--------------------------------------------------------");
-        System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
-        System.out.println("--------------------------------------------------------");
-        Node<GameEntry> pointer = list.head;
-        pointer = list.head;
-        while (pointer != null) {
-            System.out.println(pointer.element + " ");
-            pointer = pointer.next;
-        }
+        printList(list);
 
-        // list.removeNode(1);
-        // list.removeNode(9);
-        // list.removeNode(3);
+        // if (list.isEmpty()) {
+        //     System.out.println("Empty list.");
+        // } else {
+        //     System.out.println("--------------------------------------------------------");
+        //     System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
+        //     System.out.println("--------------------------------------------------------");
+        //     Node<GameEntry> pointer = list.head;
+        //     pointer = list.head;
+        //     while (pointer != null) {
+        //         System.out.println(pointer.element + " ");
+        //         pointer = pointer.next;
+        //     }
+        // }
 
-        System.out.println("--------------------------------------------------------");
-        System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
-        System.out.println("--------------------------------------------------------");
+        list.removeNode(1);
+        list.removeNode(9);
+        list.removeNode(3);
 
-        pointer = list.head;
-        pointer = list.head;
-        while (pointer != null) {
-            System.out.println(pointer.element + " ");
-            pointer = pointer.next;
-        }
+        printList(list);
+
+        // System.out.println("--------------------------------------------------------");
+        // System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
+        // System.out.println("--------------------------------------------------------");
+
+        // pointer = list.head;
+        // pointer = list.head;
+        // while (pointer != null) {
+        //     System.out.println(pointer.element + " ");
+        //     pointer = pointer.next;
+        // }
     }
 
+    
+    public static void printList(SinglyLinkedList<GameEntry> list ){
+        if (list.isEmpty()) {
+            System.out.println("Empty list.");
+        } else {
+            System.out.println("--------------------------------------------------------");
+            System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
+            System.out.println("--------------------------------------------------------");
+            Node<GameEntry> pointer = list.head;
+            pointer = list.head;
+            while (pointer != null) {
+                System.out.println(pointer.element + " ");
+                pointer = pointer.next;
+            }
+        }
+
+
+    }
     /** Removes the nth node in the list */
     public void removeNode(int i) {
         if (i < 1 || i > size) {
@@ -69,7 +95,7 @@ public class SinglyLinkedList<E> {
             Node<E> pointer = head.next;
             int j = 2;
 
-            while (i > j + 1 ) {
+            while (i > j + 1) {
                 pointer = pointer.next;
                 j++;
             }
@@ -80,7 +106,7 @@ public class SinglyLinkedList<E> {
             }
             size--;
         }
-        
+
     }
 
     /** Adds a new score node to the list in the proper position */
