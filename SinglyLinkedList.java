@@ -2,7 +2,7 @@
 public class SinglyLinkedList<E> {
 
     // instance variables
-    SinglyLinkedList<Integer> _scores;
+    SinglyLinkedList<GameEntry> _scores;
     private Node<E> head = null;
     private Node<E> tail = null;
     private int size = 0;
@@ -12,74 +12,74 @@ public class SinglyLinkedList<E> {
         head = null;
         tail = null;
         size = 0;
-        _scores = (SinglyLinkedList<Integer>) this; // reference to self
+        _scores = (SinglyLinkedList<GameEntry>) this; // reference to self
     }
 
     public static void main(String[] args) {
-        Integer[] a = new Integer[] { 10, 9, 7, 5, 4, 2, 1 };
-        SinglyLinkedList<Integer> list = new SinglyLinkedList<>();
+        int[] a = new int[] { 10, 9, 7, 5, 4, 2, 1,12,15,13,19 };
+        SinglyLinkedList<GameEntry> list = new SinglyLinkedList<>();
 
         // Load with Test Data
         // list.addFirst(a[0]);
         for (int i = 0; i < a.length; i++) {
-            list.addNewScore(a[i]);
+            list.addNewScore(new GameEntry("Score_"+i, a[i]));
         }
-        list.addNewScore(11);
-        list.addNewScore(4);
-        list.addNewScore(5);
-        list.addNewScore(1);
-        list.addNewScore(8);
-        list.addNewScore(0);
+        // list.addNewScore(11);
+        // list.addNewScore(4);
+        // list.addNewScore(5);
+        // list.addNewScore(1);
+        // list.addNewScore(8);
+        // list.addNewScore(0);
 
-        Node<Integer> pointer = list.head;
+        System.out.println("--------------------------------------------------------");
+        System.out.print("head: " + list.head.element+"\ttail: " + list.tail.element+"\n");
+        System.out.println("--------------------------------------------------------");
 
+        Node<GameEntry> pointer = list.head;
         pointer = list.head;
         while (pointer != null) {
-            System.out.print(pointer.element + " ");
+            System.out.println(pointer.element + " ");
             pointer = pointer.next;
         }
-        System.out.println("-----");
-        System.out.print("\thead: " + list.head.element);
-        System.out.print("\ttail: " + list.tail.element);
 
     }
 
-    /**Adds a new score node to the list in the proper position */
-    public void addNewScore(int newScore) {
+    /** Adds a new score node to the list in the proper position */
+    public void addNewScore(GameEntry entry) {
 
-        Node<Integer> pointer = _scores.head;
+        Node<GameEntry> pointer = _scores.head;
         // pointer = list.head;
-        int ptrScore = pointer != null ? pointer.element : 0;
+        int ptrScore = pointer != null ? pointer.element.score : 0;
 
         // is list empty or is it bigger than head? just add to head
-        if ( isEmpty() || newScore > ptrScore ) {
-            _scores.addFirst(newScore);
+        if (isEmpty() || entry.score > ptrScore) {
+            _scores.addFirst(entry);
         } else {
             // find the spot to insert
-            while (pointer != tail && newScore < pointer.next.element) {
+            while (pointer != tail && entry.score < pointer.next.element.score) {
                 pointer = pointer.next;
             }
 
             if (pointer == _scores.tail) {
-                _scores.addLast(newScore);
+                _scores.addLast(entry);
             } else {
                 // found the spot to insert between head and tail
-                _scores.insert(newScore, pointer);
+                _scores.insert(entry, pointer);
             }
         }
-        
-        if (size > 10){
+
+        if (size > 10) {
             removeLastNode();
         }
     }
-
-    /**Removes the last node of the list */
-    public void removeLastNode(){
+    /** Removes the last node of the list */
+    public void removeLastNode() {
         Node<E> ptr = head;
 
-        if (head == null){return;}
-
-        while (ptr.next != tail){
+        if (head == null) {
+            return;
+        }
+        while (ptr.next != tail) {
             ptr = ptr.next;
         }
         ptr.next = null;
@@ -105,15 +105,14 @@ public class SinglyLinkedList<E> {
         return tail.getElement();
     }
     // update methods
-    public Node<E> addFirst(E e) {
+    public void addFirst(E e) {
         head = new Node<>(e, head);
         if (size == 0) {
             tail = head;
         }
         size++;
-        return head;
     }
-    public Node<E> addLast(E e) {
+    public void addLast(E e) {
         Node<E> newest = new Node<>(e, null);
         if (isEmpty()) {
             head = newest;
@@ -122,7 +121,6 @@ public class SinglyLinkedList<E> {
         }
         tail = newest; // new node becomes the tail
         size++;
-        return newest;
     }
     public E removeFirst() {
         if (isEmpty()) {
@@ -138,6 +136,7 @@ public class SinglyLinkedList<E> {
         return element; // return the node element.
 
     }
+
     /** If list is empty, insert at head, otherwise insert after prev */
     public void insert(E e, Node<E> prev) {
         if (isEmpty()) {
@@ -148,6 +147,7 @@ public class SinglyLinkedList<E> {
             size++;
         }
     }
+
     // nested Node Class
     private static class Node<E> {
         private E element;
@@ -170,7 +170,7 @@ public class SinglyLinkedList<E> {
             next = n;
         }
     }
-    /**Class to score Player's Name and High Score */
+    /** Class to score Player's Name and High Score */
     private static class GameEntry {
         private String name;
         private int score;
@@ -179,15 +179,29 @@ public class SinglyLinkedList<E> {
             name = n;
             score = s;
         }
+
         // #region Getters & Setters
-        public String getName() { return name;}
-        public void setName(String name) {this.name = name;}
-        public int getScore() {return score;}
-        public void setScore(int score) {this.score = score;}
+        public String getName() {
+            return name;
+        }
+
+        public void setName(String name) {
+            this.name = name;
+        }
+
+        public int getScore() {
+            return score;
+        }
+
+        public void setScore(int score) {
+            this.score = score;
+        }
 
         // #endregion
 
         /** Returns a formatted string representation of this entry. */
         public String toString() {
             return String.format("%s :\t %02d", name, score);
-        }}
+        }
+    }
+}
