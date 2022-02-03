@@ -16,30 +16,64 @@ public class SinglyLinkedList<E> {
     }
 
     public static void main(String[] args) {
-        int[] a = new int[] { 10, 9, 7, 5, 4, 2, 1,12,15,13,19 };
+        int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         SinglyLinkedList<GameEntry> list = new SinglyLinkedList<>();
 
         // Load with Test Data
         // list.addFirst(a[0]);
         for (int i = 0; i < a.length; i++) {
-            list.addNewScore(new GameEntry("Score_"+i, a[i]));
+            list.addNewScore(new GameEntry("Score_" + (i + 1), a[i]));
         }
-        // list.addNewScore(11);
-        // list.addNewScore(4);
-        // list.addNewScore(5);
-        // list.addNewScore(1);
-        // list.addNewScore(8);
-        // list.addNewScore(0);
 
         System.out.println("--------------------------------------------------------");
-        System.out.print("head: " + list.head.element+"\ttail: " + list.tail.element+"\n");
+        System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
         System.out.println("--------------------------------------------------------");
-
         Node<GameEntry> pointer = list.head;
         pointer = list.head;
         while (pointer != null) {
             System.out.println(pointer.element + " ");
             pointer = pointer.next;
+        }
+
+        list.removeNode(1);
+        list.removeNode(9);
+        list.removeNode(3);
+
+        System.out.println("--------------------------------------------------------");
+        System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
+        System.out.println("--------------------------------------------------------");
+
+        pointer = list.head;
+        pointer = list.head;
+        while (pointer != null) {
+            System.out.println(pointer.element + " ");
+            pointer = pointer.next;
+        }
+    }
+
+    /** Removes the nth node in the list */
+    public void removeNode(int i) {
+        if (i < 1 || i > size) {
+            throw new IndexOutOfBoundsException();
+        }
+
+        if (i == 1) {
+            removeFirst();
+        } else if (i == size) {
+            removeLastNode();
+        } else {
+            Node<E> pointer = head.next;
+            int j = 2;
+
+            while (i != j + 1 && pointer.next != tail) {
+                pointer = pointer.next;
+                j++;
+            }
+            if (pointer.next == tail) {
+                removeLastNode();
+            } else {
+                pointer.next = pointer.next.next;
+            }
         }
 
     }
@@ -67,11 +101,11 @@ public class SinglyLinkedList<E> {
                 _scores.insert(entry, pointer);
             }
         }
-
         if (size > 10) {
             removeLastNode();
         }
     }
+
     /** Removes the last node of the list */
     public void removeLastNode() {
         Node<E> ptr = head;
@@ -85,25 +119,30 @@ public class SinglyLinkedList<E> {
         ptr.next = null;
         tail = ptr;
     }
+
     // access methods
     public int size() {
         return size;
     }
+
     public boolean isEmpty() {
         return size == 0;
     }
+
     public E first() {
         if (isEmpty()) {
             return null;
         }
         return head.getElement();
     }
+
     public E last() {
         if (isEmpty()) {
             return null;
         }
         return tail.getElement();
     }
+
     // update methods
     public void addFirst(E e) {
         head = new Node<>(e, head);
@@ -112,6 +151,7 @@ public class SinglyLinkedList<E> {
         }
         size++;
     }
+
     public void addLast(E e) {
         Node<E> newest = new Node<>(e, null);
         if (isEmpty()) {
@@ -122,6 +162,7 @@ public class SinglyLinkedList<E> {
         tail = newest; // new node becomes the tail
         size++;
     }
+
     public E removeFirst() {
         if (isEmpty()) {
             return null;
@@ -170,6 +211,7 @@ public class SinglyLinkedList<E> {
             next = n;
         }
     }
+
     /** Class to score Player's Name and High Score */
     private static class GameEntry {
         private String name;
@@ -201,7 +243,7 @@ public class SinglyLinkedList<E> {
 
         /** Returns a formatted string representation of this entry. */
         public String toString() {
-            return String.format("%s :\t %02d", name, score);
+            return String.format("%s :    %02d", name, score);
         }
     }
 }
