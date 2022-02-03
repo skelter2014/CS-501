@@ -19,54 +19,44 @@ public class SinglyLinkedList<E> {
         int[] a = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         SinglyLinkedList<GameEntry> list = new SinglyLinkedList<>();
 
-        // Load with Test Data
-        // list.addFirst(a[0]);
+        // Load with 10 scores of test data
+        printList(list);
         for (int i = 0; i < a.length; i++) {
             list.addNewScore(new GameEntry("Score_" + (i + 1), a[i]));
         }
+        printList(list);
 
-        // for (int i = a.length; i >= 1; i--) {
-        //     list.removeNode(i);
-        // }
+        // Add insert a new score into the list
+        list.addNewScore(new GameEntry("Score_X", 7));
+        printList(list);
+
+        // Test removing 8 nodes
+        while (list.size > 2) {
+            list.removeNode(1);
+        }
+        printList(list);
+        // add a couple more
+        list.addNewScore(new GameEntry("Test", 11));
+        list.addFirst(new GameEntry("First", 2)); // Add directly to head. Not subject to sort
+        list.addLast(new GameEntry("Last", 99));// Add directly to tail. Not subject to sort.
 
         printList(list);
 
-        // if (list.isEmpty()) {
-        //     System.out.println("Empty list.");
-        // } else {
-        //     System.out.println("--------------------------------------------------------");
-        //     System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
-        //     System.out.println("--------------------------------------------------------");
-        //     Node<GameEntry> pointer = list.head;
-        //     pointer = list.head;
-        //     while (pointer != null) {
-        //         System.out.println(pointer.element + " ");
-        //         pointer = pointer.next;
-        //     }
-        // }
-
-        list.removeNode(1);
-        list.removeNode(9);
-        list.removeNode(3);
+        // test the removeNode method
+        if (!list.isEmpty()) {
+            list.removeNode(1);
+            list.removeNode(1);
+            list.removeNode(1);
+        }
 
         printList(list);
 
-        // System.out.println("--------------------------------------------------------");
-        // System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
-        // System.out.println("--------------------------------------------------------");
-
-        // pointer = list.head;
-        // pointer = list.head;
-        // while (pointer != null) {
-        //     System.out.println(pointer.element + " ");
-        //     pointer = pointer.next;
-        // }
     }
 
-    
-    public static void printList(SinglyLinkedList<GameEntry> list ){
+    /** Iterate the entire list and print the scores */
+    public static void printList(SinglyLinkedList<GameEntry> list) {
         if (list.isEmpty()) {
-            System.out.println("Empty list.");
+            System.out.println("\n------------------[Empty list]--------------------------\n");
         } else {
             System.out.println("--------------------------------------------------------");
             System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
@@ -79,8 +69,8 @@ public class SinglyLinkedList<E> {
             }
         }
 
-
     }
+
     /** Removes the nth node in the list */
     public void removeNode(int i) {
         if (i < 1 || i > size) {
@@ -152,7 +142,7 @@ public class SinglyLinkedList<E> {
         size--;
     }
 
-    // access methods
+    // helper methods
     public int size() {
         return size;
     }
@@ -175,16 +165,24 @@ public class SinglyLinkedList<E> {
         return tail.getElement();
     }
 
-    // update methods
+    /** Add a score directly to head of list. Does not ensure proper ordering. */
     public void addFirst(E e) {
         head = new Node<>(e, head);
         if (size == 0) {
             tail = head;
         }
         size++;
+        // Make sure still mainain MAX records in list.
+        if (size > 10) {
+            removeLastNode();
+        }
     }
 
+    /** Add score directly to end of list. Does not ensure proper ordering */
     public void addLast(E e) {
+        if (size == 10) {
+            throw new UnsupportedOperationException("List already has MAX elements.");
+        }
         Node<E> newest = new Node<>(e, null);
         if (isEmpty()) {
             head = newest;
