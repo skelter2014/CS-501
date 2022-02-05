@@ -1,3 +1,4 @@
+import javax.swing.plaf.basic.BasicSliderUI.TrackListener;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
 /** A basic doubly linked list */
@@ -7,12 +8,14 @@ public class DoublyLinkedList<E> {
     private Node<E> trailer;
     private int size = 0;
     private final int MAX_SCORES = 10;
+    private int hops = 0;
 
     public static void main(String[] args) {
         DoublyLinkedList<GameEntry> _scores = new DoublyLinkedList<GameEntry>();
 
         int[] a = new int[] { 22, 34, 5, 1, 7, 9, 12, 19, 18, 12, 9, 7, 2, 22, 3, 1, 11 };
-        // int[] a = new int[] { 4,1,2,3 };
+        //int[] a = new int[] { 1,2,2,3 };
+        //int[]a = new int[]{5,4,3,2,1};
         // Load with 10 scores of test data
         _scores.printList();
         for (int i = 0; i < a.length; i++) {
@@ -36,7 +39,7 @@ public class DoublyLinkedList<E> {
             System.out.println("\n------------------[Empty list]--------------------------\n");
         } else {
             System.out.println("--------------------------------------------------------");
-            System.out.print("head: " + highScore() + "\ttail: " + lowScore() + "\n");
+            System.out.print("head: " + highScore() + "\ttail: " + lowScore() + "\t\tcount: "+ size + "\n");
             System.out.println("--------------------------------------------------------");
             Node<E> pointer = header.next;
 
@@ -63,37 +66,68 @@ public class DoublyLinkedList<E> {
         return !isEmpty() ? ((GameEntry) trailer.prev.element).score : 0;
     }
 
-    /** Adds a new score node to the list in the proper DEC SORTED position */
+    /** Adds a new score node to the list in the proper DEC SORTED position 
+     * This is the only public method to add scores to this list ensuring that 
+     * all scores are sorted and inserted properly
+    */
     public void addNewScore(E entry) {
         int newScore = ((GameEntry) entry).score;
 
-        if (isEmpty() || newScore > highScore()) {
+        if (isEmpty() || newScore >= highScore()) {
             addFirst(entry);
-            size++;
-        } else {
+        } else if  (size <= MAX_SCORES || newScore >= lowScore() ) { //only walk the list if it is higher than low score
             // determine pointer. Start at header or trailer
-            int mean = highScore() + lowScore() / 2;
+            int mean = (highScore() + lowScore()) / 2;
             Node<E> pointer;
-            // if ( newScore < mean) {
-            if (true) {
+            
+            if ( newScore < mean) { //Search left to right
                 pointer = header.next;
-            } else {
+                pointer = searchFromHeader(pointer, newScore);
+                if (pointer == trailer) {
+                    addLast(entry);
+                } else {
+                    addBetween(entry, pointer.prev, pointer);
+                }                
+            } else { //search right to left
                 pointer = trailer.prev;
+                pointer = searchFromTrailer(pointer, newScore);
+                if (pointer == header) {
+                    addFirst(entry);
+                } else {
+                    addBetween(entry, pointer, pointer.next);
+                }
             }
-            // Walk from header to insert point
-            while (pointer != trailer && newScore < ((GameEntry) pointer.element).score) {
-                pointer = pointer.next;
-            }
-            if (pointer == trailer) {
-                addLast(entry);
-            } else {
-                addBetween(entry, pointer.prev, pointer);
-            }
-            size++;
+            // // Walk from header to insert point
+            // while (pointer != trailer && newScore < ((GameEntry) pointer.element).score) {
+            //     pointer = pointer.next;
+            // }
+            // if (pointer == trailer) {
+            //     addLast(entry);
+            // } else {
+            //     addBetween(entry, pointer.prev, pointer);
+            // }
             //Make sure we only store top 10 scores
             while (size > MAX_SCORES) { removeLast();}
         }
 
+    }
+
+    //Find the correct insertion point from the head of the list.
+    private Node<E> searchFromHeader(Node<E> pointer, int newScore){
+            // Walk from header to insert point
+            while (pointer != trailer && newScore < ((GameEntry) pointer.element).score) {
+                pointer = pointer.next;
+                hops++;
+            }
+            return pointer;
+    }
+    //Find the correct insertion point from the tail of the list
+    private Node<E> searchFromTrailer(Node<E> pointer, int newScore){
+        while (pointer!= header && newScore > ((GameEntry) pointer.element).score){
+            pointer = pointer.prev;
+            hops++;
+        }
+        return pointer;
     }
 
     public int size() {
@@ -124,12 +158,28 @@ public class DoublyLinkedList<E> {
 
     /** Remove the first element in the list */
     private E removeFirst() {
-        return !isEmpty() ? header.next.element : null;
+        Node<E> deletedNode = null;;
+        if ( !isEmpty() ) {
+            deletedNode = header.next; //stored the deleted node.
+            header.next = header.next.next; // move the pointer one step right
+            size--;
+
+            return deletedNode.element;
+        }
+        else {return null;}
     }
 
     /** Removes the last element in the list */
     private E removeLast() {
-        return !isEmpty() ? trailer.prev.element : null;
+        Node<E> deletedNode = null;
+        if ( !isEmpty() ) {
+            deletedNode = trailer.prev; //store the deleted node
+            trailer = trailer.prev; //mote the pointer one step left
+            size--;
+
+            return deletedNode.element;
+        }
+        else {return null;}
     }
 
     /** Remove the element at position i in the LEAST number of iterations */
@@ -219,7 +269,7 @@ public class DoublyLinkedList<E> {
 
         /** Returns a formatted string representation of this entry. */
         public String toString() {
-            return String.format("%s :    %02d", name, score);
+            return String.format("%s :\t%02d", name, score);
         }
     }
     // #endregion - static inner classes
