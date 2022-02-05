@@ -16,7 +16,7 @@ public class DoublyLinkedList<E> {
 
         Random rnd = new Random(System.currentTimeMillis());
 
-        runTests(_scores);
+        run10ValueTests(_scores);
 
         _scores = new DoublyLinkedList<>();
 
@@ -27,14 +27,24 @@ public class DoublyLinkedList<E> {
                 avgHops += _scores.hops;
             }
         }
+        //Test Remove function at head and tail of list.
         _scores.remove(10);
         _scores.remove(1);
         _scores.printList();
+        System.out.println("Large Test Set Avg Hops:" + avgHops / 1000000);
 
-        System.out.println("Total avgHops:" + avgHops / 1000000);
+        try {
+            _scores.remove(10);
+        }
+        catch (IndexOutOfBoundsException ex) {
+            System.out.println("Index out of bounds exception works.");
+
+        }
+        
+
 
     }
-    public static void runTests(DoublyLinkedList<GameEntry> _scores) {
+    public static void run10ValueTests(DoublyLinkedList<GameEntry> _scores) {
         int[] a = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
         int[] b = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         int[] c = new int[] { 10, 1, 9, 2, 8, 3, 7, 4, 6, 5 }; // worse case #1.
