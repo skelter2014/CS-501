@@ -1,3 +1,5 @@
+import java.util.Random;
+
 import javax.swing.plaf.basic.BasicSliderUI.TrackListener;
 import javax.swing.text.StyledEditorKit.BoldAction;
 
@@ -9,28 +11,52 @@ public class DoublyLinkedList<E> {
     private int size = 0;
     private final int MAX_SCORES = 10;
     private int hops = 0;
+    private static boolean HEAD_ONLY = false; //an override for testing hops
+    private static boolean TAIL_ONLY = true; //provide an override for testing
 
     public static void main(String[] args) {
         DoublyLinkedList<GameEntry> _scores = new DoublyLinkedList<GameEntry>();
 
-        int[] a = new int[] { 22, 34, 5, 1, 7, 9, 12, 19, 18, 12, 9, 7, 2, 22, 3, 1, 11 };
-        //int[] a = new int[] { 1,2,2,3 };
-        //int[]a = new int[]{5,4,3,2,1};
-        // Load with 10 scores of test data
-        _scores.printList();
+        Random rnd = new Random(System.currentTimeMillis());
+
+        int[] a = new int[] {10,9,8,7,6,5,4,3,2,1};
+        int[] b = new int[] {1,2,3,4,5,6,7,8,9,10};
+        int[] c = new int[] {10,1,9,2,8,3,7,4,6,5}; //worse case #1. 
+        int[] d = new int[] {1,10,2,9,3,8,4,7,5,6}; //worse case #2. 
+
+        // Load with test data
+
+        System.out.println("\nTest A HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
         for (int i = 0; i < a.length; i++) {
             _scores.addNewScore(new GameEntry("Score_" + (i + 1), a[i]));
         }
         _scores.printList();
+        System.out.println("Total Hops:" + _scores.hops);
 
-        GameEntry newScore = new GameEntry("Test", 11);
-        // _scores.addNewScore(newScore);
-        // newScore = new GameEntry("Test", 11);
-        // _scores.addNewScore(newScore);
-        // _scores.printList();
-        // newScore = new GameEntry("Test", 1);
-        // _scores.addNewScore(newScore);
-        // _scores.printList();
+        _scores = new DoublyLinkedList<>();
+        System.out.println("\nTest B HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        for (int i = 0; i < a.length; i++) {
+            _scores.addNewScore(new GameEntry("Score_" + (i + 1), b[i]));
+        }
+        _scores.printList();
+        System.out.println("Total Hops:" + _scores.hops);
+       
+        _scores = new DoublyLinkedList<>();
+        System.out.println("\nTest C HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        for (int i = 0; i < a.length; i++) {
+            _scores.addNewScore(new GameEntry("Score_" + (i + 1), c[i]));
+        }
+        _scores.printList();
+        System.out.println("Total Hops:" + _scores.hops);
+        
+        _scores = new DoublyLinkedList<>();
+        System.out.println("\nTest D HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        for (int i = 0; i < a.length; i++) {
+            _scores.addNewScore(new GameEntry("Score_" + (i + 1), d[i]));
+        }
+        _scores.printList();
+        System.out.println("Total Hops:" + _scores.hops);
+
 
     }
 
@@ -69,18 +95,20 @@ public class DoublyLinkedList<E> {
     /** Adds a new score node to the list in the proper DEC SORTED position 
      * This is the only public method to add scores to this list ensuring that 
      * all scores are sorted and inserted properly
+     * 
+     * 
     */
     public void addNewScore(E entry) {
         int newScore = ((GameEntry) entry).score;
 
         if (isEmpty() || newScore >= highScore()) {
             addFirst(entry);
-        } else if  (size <= MAX_SCORES || newScore >= lowScore() ) { //only walk the list if it is higher than low score
+        } else if  (size <= MAX_SCORES || newScore > lowScore() ) { //only walk the list if it is higher than low score
             // determine pointer. Start at header or trailer
             int mean = (highScore() + lowScore()) / 2;
             Node<E> pointer;
-            
-            if ( newScore < mean) { //Search left to right
+            //if (START_AT_HEAD_ONLY){
+            if ( ! TAIL_ONLY &&  (HEAD_ONLY || newScore > mean) ) { //Search left to right
                 pointer = header.next;
                 pointer = searchFromHeader(pointer, newScore);
                 if (pointer == trailer) {
@@ -97,15 +125,6 @@ public class DoublyLinkedList<E> {
                     addBetween(entry, pointer, pointer.next);
                 }
             }
-            // // Walk from header to insert point
-            // while (pointer != trailer && newScore < ((GameEntry) pointer.element).score) {
-            //     pointer = pointer.next;
-            // }
-            // if (pointer == trailer) {
-            //     addLast(entry);
-            // } else {
-            //     addBetween(entry, pointer.prev, pointer);
-            // }
             //Make sure we only store top 10 scores
             while (size > MAX_SCORES) { removeLast();}
         }
