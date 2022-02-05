@@ -1,8 +1,5 @@
 import java.util.Random;
 
-import javax.swing.plaf.basic.BasicSliderUI.TrackListener;
-import javax.swing.text.StyledEditorKit.BoldAction;
-
 /** A basic doubly linked list */
 public class DoublyLinkedList<E> {
     // instance variables
@@ -17,15 +14,32 @@ public class DoublyLinkedList<E> {
     public static void main(String[] args) {
         DoublyLinkedList<GameEntry> _scores = new DoublyLinkedList<GameEntry>();
 
-
         Random rnd = new Random(System.currentTimeMillis());
 
+        runTests(_scores);
+
+        _scores = new DoublyLinkedList<>();
+
+        int avgHops = 0;
+        for (int j = 0; j < 1000; j++) {
+            for (int i = 0; i < 1000; i++) {
+                _scores.addNewScore(new GameEntry("Score_" + (i + 1), rnd.nextInt(99)));
+                avgHops += _scores.hops;
+            }
+        }
+        _scores.remove(10);
+        _scores.remove(1);
+        _scores.printList();
+
+        System.out.println("Total avgHops:" + avgHops / 1000000);
+
+    }
+    public static void runTests(DoublyLinkedList<GameEntry> _scores) {
         int[] a = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
         int[] b = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
         int[] c = new int[] { 10, 1, 9, 2, 8, 3, 7, 4, 6, 5 }; // worse case #1.
-        int[] d = new int[] { 1, 10, 2, 9, 3, 8, 4, 7, 5, 6 }; // worse case #2.
-
-        // Load with test data
+        int[] d = new int[] { 1, 10, 2, 9, 3, 8, 4, 7, 5, 6 }; // worse case #2.        
+        //#region 10 value tests
 
         System.out.println("\nTest A HEAD_ONLY/TAIL_ONLY = " + HEAD_ONLY + ":" + TAIL_ONLY);
         for (int i = 0; i < a.length; i++) {
@@ -57,21 +71,10 @@ public class DoublyLinkedList<E> {
         }
         _scores.printList();
         System.out.println("Total Hops:" + _scores.hops);
+        //#endregion
 
-        _scores = new DoublyLinkedList<>();
-
-        int avgHops = 0;
-        for (int j = 0; j < 1000; j++) {
-            for (int i = 0; i < 1000; i++) {
-                _scores.addNewScore(new GameEntry("Score_" + (i + 1), rnd.nextInt(99)));
-                avgHops += _scores.hops;
-            }
-        }
-        _scores.printList();
-        System.out.println("Total avgHops:" + avgHops / 1000000);
 
     }
-
     public void printList() {
         if (isEmpty()) {
             System.out.println("\n------------------[Empty list]--------------------------\n");
@@ -116,11 +119,11 @@ public class DoublyLinkedList<E> {
 
         if (isEmpty() || newScore >= highScore()) {
             addFirst(entry);
-        } else if (size <= MAX_SCORES || newScore > lowScore()) { 
+        } else if (size <= MAX_SCORES || newScore > lowScore()) {
             int mean = (highScore() + lowScore()) / 2;
             Node<E> pointer;
             // determine pointer. Start at header or trailer or a hybrid pointer
-            if (!TAIL_ONLY && (HEAD_ONLY || newScore > mean)) {  //the least hops is to use hybrid
+            if (!TAIL_ONLY && (HEAD_ONLY || newScore > mean)) { // the least hops is to use hybrid
                 pointer = header.next;
                 pointer = searchFromHeader(pointer, newScore);
                 if (pointer == trailer) {
@@ -221,8 +224,34 @@ public class DoublyLinkedList<E> {
 
     /** Remove the element at position i in the LEAST number of iterations */
     public E remove(int i) {
-        throw new UnsupportedOperationException();
+        if (isEmpty() || i > size) {
+            throw new IndexOutOfBoundsException("Not able to remove at index:" + i);
+        }
+        //first and last are special cases
+        if (i == 1) { return removeFirst(); }
+        if (i == size) { return removeLast();}
 
+        int midpoint = size / 2;
+
+        Node<E> pointer;
+        int counter;
+
+        if (i > midpoint) { // count from tail
+            counter = size;
+            pointer = trailer.prev;
+            while (counter > i) {
+                counter--;
+                pointer = pointer.prev;
+            }
+        } else { // count from
+            counter = 1;
+            pointer = header.next;
+            while (counter < i){
+                counter++;
+                pointer = pointer.next;
+            }
+        }
+        return remove(pointer);
     }
 
     /** Adds element between given before / after nodes */
