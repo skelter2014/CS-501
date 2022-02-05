@@ -17,9 +17,29 @@ public class ReinforcementClass {
         System.out.println("Number 3 is odd: " + ReinforcementClass.isOdd(3));
         System.out.println("Number 4 is odd: " + ReinforcementClass.isOdd(4));
 
-        System.out.println(ReinforcementClass.repeat1('a', 1000000));
+        //System.out.println(ReinforcementClass.repeat1('a', 1000000));
 
+        System.out.println(add(6));
+        System.out.println(power1(2, 7));
     }
+
+    
+
+    //a recursive add function
+    public static int add(int a){
+        if (a==1) {return 1;}
+        else return (a + add(a-1));
+    }
+
+    //recursive power class
+    public static int power1(int x, int y){
+        if (y ==1 ) {return x;}
+        else return x * power1(x, y - 1  );
+    }
+
+    //
+
+    
 
     public static boolean isOdd(int num){
         return (num & 0x1) == 1;

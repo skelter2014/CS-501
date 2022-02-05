@@ -99,7 +99,7 @@ public class SinglyLinkedList<E> {
 
     }
 
-    /** Adds a new score node to the list in the proper position */
+    /** Adds a new score node to the list in the proper DEC SORTED position */
     public void addNewScore(GameEntry entry) {
 
         Node<GameEntry> pointer = _scores.head;
@@ -122,7 +122,7 @@ public class SinglyLinkedList<E> {
                 _scores.insert(entry, pointer);
             }
         }
-        if (size > 10) {
+        while (size > 10) {
             removeLastNode();
         }
     }
