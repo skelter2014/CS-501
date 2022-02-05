@@ -10,23 +10,24 @@ public class DoublyLinkedList<E> {
     private Node<E> trailer;
     private int size = 0;
     private final int MAX_SCORES = 10;
+    private static boolean HEAD_ONLY = false; // an override for testing hops
+    private static boolean TAIL_ONLY = false; // provide an override for testing
     private int hops = 0;
-    private static boolean HEAD_ONLY = false; //an override for testing hops
-    private static boolean TAIL_ONLY = true; //provide an override for testing
 
     public static void main(String[] args) {
         DoublyLinkedList<GameEntry> _scores = new DoublyLinkedList<GameEntry>();
 
+
         Random rnd = new Random(System.currentTimeMillis());
 
-        int[] a = new int[] {10,9,8,7,6,5,4,3,2,1};
-        int[] b = new int[] {1,2,3,4,5,6,7,8,9,10};
-        int[] c = new int[] {10,1,9,2,8,3,7,4,6,5}; //worse case #1. 
-        int[] d = new int[] {1,10,2,9,3,8,4,7,5,6}; //worse case #2. 
+        int[] a = new int[] { 10, 9, 8, 7, 6, 5, 4, 3, 2, 1 };
+        int[] b = new int[] { 1, 2, 3, 4, 5, 6, 7, 8, 9, 10 };
+        int[] c = new int[] { 10, 1, 9, 2, 8, 3, 7, 4, 6, 5 }; // worse case #1.
+        int[] d = new int[] { 1, 10, 2, 9, 3, 8, 4, 7, 5, 6 }; // worse case #2.
 
         // Load with test data
 
-        System.out.println("\nTest A HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        System.out.println("\nTest A HEAD_ONLY/TAIL_ONLY = " + HEAD_ONLY + ":" + TAIL_ONLY);
         for (int i = 0; i < a.length; i++) {
             _scores.addNewScore(new GameEntry("Score_" + (i + 1), a[i]));
         }
@@ -34,29 +35,40 @@ public class DoublyLinkedList<E> {
         System.out.println("Total Hops:" + _scores.hops);
 
         _scores = new DoublyLinkedList<>();
-        System.out.println("\nTest B HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        System.out.println("\nTest B HEAD_ONLY/TAIL_ONLY = " + HEAD_ONLY + ":" + TAIL_ONLY);
         for (int i = 0; i < a.length; i++) {
             _scores.addNewScore(new GameEntry("Score_" + (i + 1), b[i]));
         }
         _scores.printList();
         System.out.println("Total Hops:" + _scores.hops);
-       
+
         _scores = new DoublyLinkedList<>();
-        System.out.println("\nTest C HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        System.out.println("\nTest C HEAD_ONLY/TAIL_ONLY = " + HEAD_ONLY + ":" + TAIL_ONLY);
         for (int i = 0; i < a.length; i++) {
             _scores.addNewScore(new GameEntry("Score_" + (i + 1), c[i]));
         }
         _scores.printList();
         System.out.println("Total Hops:" + _scores.hops);
-        
+
         _scores = new DoublyLinkedList<>();
-        System.out.println("\nTest D HEAD_ONLY/TAIL_ONLY = "+ HEAD_ONLY+":"+TAIL_ONLY);
+        System.out.println("\nTest D HEAD_ONLY/TAIL_ONLY = " + HEAD_ONLY + ":" + TAIL_ONLY);
         for (int i = 0; i < a.length; i++) {
             _scores.addNewScore(new GameEntry("Score_" + (i + 1), d[i]));
         }
         _scores.printList();
         System.out.println("Total Hops:" + _scores.hops);
 
+        _scores = new DoublyLinkedList<>();
+
+        int avgHops = 0;
+        for (int j = 0; j < 1000; j++) {
+            for (int i = 0; i < 1000; i++) {
+                _scores.addNewScore(new GameEntry("Score_" + (i + 1), rnd.nextInt(99)));
+                avgHops += _scores.hops;
+            }
+        }
+        _scores.printList();
+        System.out.println("Total avgHops:" + avgHops / 1000000);
 
     }
 
@@ -65,7 +77,7 @@ public class DoublyLinkedList<E> {
             System.out.println("\n------------------[Empty list]--------------------------\n");
         } else {
             System.out.println("--------------------------------------------------------");
-            System.out.print("head: " + highScore() + "\ttail: " + lowScore() + "\t\tcount: "+ size + "\n");
+            System.out.print("head: " + highScore() + "\ttail: " + lowScore() + "\t\tcount: " + size + "\n");
             System.out.println("--------------------------------------------------------");
             Node<E> pointer = header.next;
 
@@ -92,31 +104,31 @@ public class DoublyLinkedList<E> {
         return !isEmpty() ? ((GameEntry) trailer.prev.element).score : 0;
     }
 
-    /** Adds a new score node to the list in the proper DEC SORTED position 
-     * This is the only public method to add scores to this list ensuring that 
+    /**
+     * Adds a new score node to the list in the proper DEC SORTED position
+     * This is the only public method to add scores to this list ensuring that
      * all scores are sorted and inserted properly
      * 
      * 
-    */
+     */
     public void addNewScore(E entry) {
         int newScore = ((GameEntry) entry).score;
 
         if (isEmpty() || newScore >= highScore()) {
             addFirst(entry);
-        } else if  (size <= MAX_SCORES || newScore > lowScore() ) { //only walk the list if it is higher than low score
-            // determine pointer. Start at header or trailer
+        } else if (size <= MAX_SCORES || newScore > lowScore()) { 
             int mean = (highScore() + lowScore()) / 2;
             Node<E> pointer;
-            //if (START_AT_HEAD_ONLY){
-            if ( ! TAIL_ONLY &&  (HEAD_ONLY || newScore > mean) ) { //Search left to right
+            // determine pointer. Start at header or trailer or a hybrid pointer
+            if (!TAIL_ONLY && (HEAD_ONLY || newScore > mean)) {  //the least hops is to use hybrid
                 pointer = header.next;
                 pointer = searchFromHeader(pointer, newScore);
                 if (pointer == trailer) {
                     addLast(entry);
                 } else {
                     addBetween(entry, pointer.prev, pointer);
-                }                
-            } else { //search right to left
+                }
+            } else { // search right to left
                 pointer = trailer.prev;
                 pointer = searchFromTrailer(pointer, newScore);
                 if (pointer == header) {
@@ -125,24 +137,27 @@ public class DoublyLinkedList<E> {
                     addBetween(entry, pointer, pointer.next);
                 }
             }
-            //Make sure we only store top 10 scores
-            while (size > MAX_SCORES) { removeLast();}
+            // Make sure we only store top 10 scores
+        }
+        while (size > MAX_SCORES) {
+            removeLast();
         }
 
     }
 
-    //Find the correct insertion point from the head of the list.
-    private Node<E> searchFromHeader(Node<E> pointer, int newScore){
-            // Walk from header to insert point
-            while (pointer != trailer && newScore < ((GameEntry) pointer.element).score) {
-                pointer = pointer.next;
-                hops++;
-            }
-            return pointer;
+    // Find the correct insertion point from the head of the list.
+    private Node<E> searchFromHeader(Node<E> pointer, int newScore) {
+        // Walk from header to insert point
+        while (pointer != trailer && newScore < ((GameEntry) pointer.element).score) {
+            pointer = pointer.next;
+            hops++;
+        }
+        return pointer;
     }
-    //Find the correct insertion point from the tail of the list
-    private Node<E> searchFromTrailer(Node<E> pointer, int newScore){
-        while (pointer!= header && newScore > ((GameEntry) pointer.element).score){
+
+    // Find the correct insertion point from the tail of the list
+    private Node<E> searchFromTrailer(Node<E> pointer, int newScore) {
+        while (pointer != header && newScore > ((GameEntry) pointer.element).score) {
             pointer = pointer.prev;
             hops++;
         }
@@ -177,28 +192,31 @@ public class DoublyLinkedList<E> {
 
     /** Remove the first element in the list */
     private E removeFirst() {
-        Node<E> deletedNode = null;;
-        if ( !isEmpty() ) {
-            deletedNode = header.next; //stored the deleted node.
+        Node<E> deletedNode = null;
+        ;
+        if (!isEmpty()) {
+            deletedNode = header.next; // stored the deleted node.
             header.next = header.next.next; // move the pointer one step right
             size--;
 
             return deletedNode.element;
+        } else {
+            return null;
         }
-        else {return null;}
     }
 
     /** Removes the last element in the list */
     private E removeLast() {
         Node<E> deletedNode = null;
-        if ( !isEmpty() ) {
-            deletedNode = trailer.prev; //store the deleted node
-            trailer = trailer.prev; //mote the pointer one step left
+        if (!isEmpty()) {
+            deletedNode = trailer.prev; // store the deleted node
+            trailer = trailer.prev; // mote the pointer one step left
             size--;
 
             return deletedNode.element;
+        } else {
+            return null;
         }
-        else {return null;}
     }
 
     /** Remove the element at position i in the LEAST number of iterations */
