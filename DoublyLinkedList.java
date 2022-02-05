@@ -133,7 +133,8 @@ public class DoublyLinkedList<E> {
             int mean = (highScore() + lowScore()) / 2;
             Node<E> pointer;
             // determine pointer. Start at header or trailer or a hybrid pointer
-            if (!TAIL_ONLY && (HEAD_ONLY || newScore > mean)) { // the least hops is to use hybrid
+            // the most efficient search uses header/trailer search together
+            if (!TAIL_ONLY && (HEAD_ONLY || newScore > mean)) { //start from header
                 pointer = header.next;
                 pointer = searchFromHeader(pointer, newScore);
                 if (pointer == trailer) {
@@ -141,7 +142,7 @@ public class DoublyLinkedList<E> {
                 } else {
                     addBetween(entry, pointer.prev, pointer);
                 }
-            } else { // search right to left
+            } else { // search search from trailer to the left
                 pointer = trailer.prev;
                 pointer = searchFromTrailer(pointer, newScore);
                 if (pointer == header) {
@@ -150,9 +151,9 @@ public class DoublyLinkedList<E> {
                     addBetween(entry, pointer, pointer.next);
                 }
             }
-            // Make sure we only store top 10 scores
         }
-        while (size > MAX_SCORES) {
+            // Make sure we only store top 10 scores
+            while (size > MAX_SCORES) {
             removeLast();
         }
 
