@@ -1,0 +1,231 @@
+
+Test A HEAD_ONLY/TAIL_ONLY = true:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_1 :	10 
+Score_2 :	09 
+Score_3 :	08 
+Score_4 :	07 
+Score_5 :	06 
+Score_6 :	05 
+Score_7 :	04 
+Score_8 :	03 
+Score_9 :	02 
+Score_10 :	01 
+Total Hops:45
+
+Test B HEAD_ONLY/TAIL_ONLY = true:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_10 :	10 
+Score_9 :	09 
+Score_8 :	08 
+Score_7 :	07 
+Score_6 :	06 
+Score_5 :	05 
+Score_4 :	04 
+Score_3 :	03 
+Score_2 :	02 
+Score_1 :	01 
+Total Hops:0
+
+Test C HEAD_ONLY/TAIL_ONLY = true:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_1 :	10 
+Score_3 :	09 
+Score_5 :	08 
+Score_7 :	07 
+Score_9 :	06 
+Score_10 :	05 
+Score_8 :	04 
+Score_6 :	03 
+Score_4 :	02 
+Score_2 :	01 
+Total Hops:25
+
+Test D HEAD_ONLY/TAIL_ONLY = true:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_2 :	10 
+Score_4 :	09 
+Score_6 :	08 
+Score_8 :	07 
+Score_10 :	06 
+Score_9 :	05 
+Score_7 :	04 
+Score_5 :	03 
+Score_3 :	02 
+Score_1 :	01 
+Total Hops:20
+--------------------------------------------------------
+head: 98	tail: 98		count: 8
+--------------------------------------------------------
+Score_978 :	98 
+Score_858 :	98 
+Score_847 :	98 
+Score_656 :	98 
+Score_512 :	98 
+Score_398 :	98 
+Score_364 :	98 
+Score_362 :	98 
+Large Test Set Avg Hops:1570
+Index out of bounds exception works.
+
+Test A HEAD_ONLY/TAIL_ONLY = false:true
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_1 :	10 
+Score_2 :	09 
+Score_3 :	08 
+Score_4 :	07 
+Score_5 :	06 
+Score_6 :	05 
+Score_7 :	04 
+Score_8 :	03 
+Score_9 :	02 
+Score_10 :	01 
+Total Hops:0
+
+Test B HEAD_ONLY/TAIL_ONLY = false:true
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_10 :	10 
+Score_9 :	09 
+Score_8 :	08 
+Score_7 :	07 
+Score_6 :	06 
+Score_5 :	05 
+Score_4 :	04 
+Score_3 :	03 
+Score_2 :	02 
+Score_1 :	01 
+Total Hops:0
+
+Test C HEAD_ONLY/TAIL_ONLY = false:true
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_1 :	10 
+Score_3 :	09 
+Score_5 :	08 
+Score_7 :	07 
+Score_9 :	06 
+Score_10 :	05 
+Score_8 :	04 
+Score_6 :	03 
+Score_4 :	02 
+Score_2 :	01 
+Total Hops:20
+
+Test D HEAD_ONLY/TAIL_ONLY = false:true
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_2 :	10 
+Score_4 :	09 
+Score_6 :	08 
+Score_8 :	07 
+Score_10 :	06 
+Score_9 :	05 
+Score_7 :	04 
+Score_5 :	03 
+Score_3 :	02 
+Score_1 :	01 
+Total Hops:24
+--------------------------------------------------------
+head: 98	tail: 98		count: 8
+--------------------------------------------------------
+Score_846 :	98 
+Score_780 :	98 
+Score_776 :	98 
+Score_690 :	98 
+Score_554 :	98 
+Score_547 :	98 
+Score_243 :	98 
+Score_18 :	98 
+Large Test Set Avg Hops:114
+Index out of bounds exception works.
+
+Test A HEAD_ONLY/TAIL_ONLY = false:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_1 :	10 
+Score_2 :	09 
+Score_3 :	08 
+Score_4 :	07 
+Score_5 :	06 
+Score_6 :	05 
+Score_7 :	04 
+Score_8 :	03 
+Score_9 :	02 
+Score_10 :	01 
+Total Hops:0
+
+Test B HEAD_ONLY/TAIL_ONLY = false:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_10 :	10 
+Score_9 :	09 
+Score_8 :	08 
+Score_7 :	07 
+Score_6 :	06 
+Score_5 :	05 
+Score_4 :	04 
+Score_3 :	03 
+Score_2 :	02 
+Score_1 :	01 
+Total Hops:0
+
+Test C HEAD_ONLY/TAIL_ONLY = false:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_1 :	10 
+Score_3 :	09 
+Score_5 :	08 
+Score_7 :	07 
+Score_9 :	06 
+Score_10 :	05 
+Score_8 :	04 
+Score_6 :	03 
+Score_4 :	02 
+Score_2 :	01 
+Total Hops:20
+
+Test D HEAD_ONLY/TAIL_ONLY = false:false
+--------------------------------------------------------
+head: 10	tail: 1		count: 10
+--------------------------------------------------------
+Score_2 :	10 
+Score_4 :	09 
+Score_6 :	08 
+Score_8 :	07 
+Score_10 :	06 
+Score_9 :	05 
+Score_7 :	04 
+Score_5 :	03 
+Score_3 :	02 
+Score_1 :	01 
+Total Hops:20
+--------------------------------------------------------
+head: 98	tail: 98		count: 8
+--------------------------------------------------------
+Score_890 :	98 
+Score_845 :	98 
+Score_833 :	98 
+Score_830 :	98 
+Score_700 :	98 
+Score_470 :	98 
+Score_995 :	98 
+Score_977 :	98 
+Large Test Set Avg Hops:87
+Index out of bounds exception works.
