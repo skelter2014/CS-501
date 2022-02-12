@@ -34,7 +34,7 @@ public class CaveFormations {
                 while ((formation & floorMask) != 0) {
                     formation = formation >> 1;
                 }
-                if ((formation | 0) == 0) { // where shouldn't be anything left.
+                if (formation == 0) { // where shouldn't be anything left.
                     System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to Floor.");
                 } else {
                     System.out.println(Arrays.toString(transformedMatrix[k]) + ": Not a valid formation.");
@@ -46,7 +46,7 @@ public class CaveFormations {
                 while ((formation & ceilingMask) != 0) {
                     formation = (formation << 1) & bitDepth; // apply the bitDepth Mask to chop off higher bits
                 }
-                if ((formation | 0) == 0) { // there shouldn't be anything left
+                if (formation  == 0) { // there shouldn't be anything left
                     System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to Ceiling.");
                 } else {
                     System.out.println(Arrays.toString(transformedMatrix[k]) + ": Not a valid formation.");
