@@ -5,10 +5,10 @@ public class CaveFormations {
     public static void main(String[] args) {
         // pivot the array. Columns are now rows
         int[][] matrix = {
-                { 0, 1, 0, 1, 0, 1, 0, 0, 1 }, // 
-                { 0, 1, 1, 1, 1, 1, 1, 1, 0 }, //---> extend this way to add more formations
-                { 0, 0, 1, 0, 0, 1, 1, 1, 1 }, // add new rows to increase height of formation.
-                { 1, 0, 1, 1, 1, 0, 1, 0, 0 }
+                { 0, 1, 0, 1, 0, 1, 0, 0, 1, 1 }, // 
+                { 0, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, //---> extend this way to add more formations
+                { 0, 0, 1, 0, 0, 1, 1, 1, 1, 1 }, // add new rows to increase height of formation.
+                { 1, 0, 1, 1, 1, 0, 1, 0, 0, 1 }
         };
         // for (int i = 0; i < matrix.length; i++)
         // System.out.println(Arrays.toString(matrix[i]));
@@ -27,6 +27,12 @@ public class CaveFormations {
         for (int k = 0; k < transformedMatrix.length; k++) {
             // Convert the sequence of 1's and 0's to an int
             int formation = convertToBinary(transformedMatrix[k]);
+
+            //Is it connected floor to ceiling? just return;
+            if (formation == bitDepth) {
+                System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to both Floor & Ceiling.");
+                continue;
+            }
 
             // is the formation attached to the floor ( ex. 0 0 0 1 )
             if ((formation & floorMask) != 0) {
