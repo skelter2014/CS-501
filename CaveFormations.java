@@ -5,10 +5,10 @@ public class CaveFormations {
     public static void main(String[] args) {
         // pivot the array. Columns are now rows
         int[][] matrix = {
-                { 0, 1, 0, 1, 0, 1, 0, 0, 1, 1 }, // 
-                { 0, 1, 1, 1, 1, 1, 1, 1, 0, 1 }, //---> extend this way to add more formations
-                { 0, 0, 1, 0, 0, 1, 1, 1, 1, 1 }, // add new rows to increase height of formation.
-                { 1, 0, 1, 1, 1, 0, 1, 0, 0, 1 }
+                { 0, 1, 0, 1, 0, 1, 0, 0, 1, 1, 0 }, // 
+                { 0, 1, 1, 1, 1, 1, 1, 1, 0, 1, 0 }, //---> extend this way to add more formations
+                { 0, 0, 1, 0, 0, 1, 1, 1, 1, 1, 0 }, // add new rows to increase height of formation.
+                { 1, 0, 1, 1, 1, 0, 1, 0, 0, 1, 0 }
         };
         // for (int i = 0; i < matrix.length; i++)
         // System.out.println(Arrays.toString(matrix[i]));
@@ -29,13 +29,14 @@ public class CaveFormations {
             int formation = convertToBinary(transformedMatrix[k]);
 
             //Is it connected floor to ceiling? just return;
-            if (formation == bitDepth) {
-                System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to both Floor & Ceiling.");
+            if (formation == bitDepth) { //ex. 1 1 1 1 - fully connected top to bottom.
+                System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to both Floor & Ceiling (column).");
                 continue;
-            }
+            } else if (formation == 0b000){
+                System.out.println(Arrays.toString(transformedMatrix[k]) + ": Empty cave.");                
 
-            // is the formation attached to the floor ( ex. 0 0 0 1 )
-            if ((formation & floorMask) != 0) {
+            }// is the formation attached to the floor ( ex. 0 0 0 1 )
+            else if ((formation & floorMask) != 0) {
                 // Shift the digits to the right until you hit a zero. ()
                 while ((formation & floorMask) != 0) {
                     formation = formation >> 1;
