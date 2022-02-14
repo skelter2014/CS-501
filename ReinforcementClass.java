@@ -32,63 +32,18 @@ public class ReinforcementClass {
         System.out.println(Arrays.toString(a));
         System.out.println("index of binary search(55) : " + binarySearch(a, 55, 0, a.length - 1));
 
-        // pivot the array. Columns are now rows
-        int[][] matrix = {
-                { 0, 1, 0, 1, 1, 0, 0, 1 }, // add more formations by increasing the width of each array
-                { 0, 1, 1, 1, 1, 1, 1, 0 },
-                { 0, 0, 1, 0, 1, 1, 1, 1 },
-                { 1, 0, 1, 1, 0, 1, 0, 0 }
-        };
-        // for (int i = 0; i < matrix.length; i++)
-        // System.out.println(Arrays.toString(matrix[i]));
 
-        int[][] transformedMatrix = transpose(matrix);
+        System.out.println( cap("hello world!".toCharArray()) );
+    }
 
-        int numFormations = transformedMatrix.length;
-        int formationHeight = transformedMatrix[0].length;
-
-        // Masks identify the highest order and lowest order bits that define a floor or
-        // ceiling formation.
-        int floorMask = 0b0001;
-        int ceilingMask = (int) Math.pow(2, formationHeight - 1);
-        int bitDepth = (int)Math.pow(2, formationHeight) - 1; // example: 0b1111
-
-        for (int k = 0; k < transformedMatrix.length; k++) {
-            // Convert the sequence of 1's and 0's to an int
-            int formation = convertToBinary(transformedMatrix[k]);
-
-            // is the formation attached to the floor ( ex. 0 0 0 1 )
-            if ((formation & floorMask) != 0) {
-                // Shift the digits to the right until you hit a zero. ()
-                while ((formation & floorMask) != 0) {
-                    formation = formation >> 1;
-                }
-                if ((formation | 0) == 0) {
-                    System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to Floor.");
-                } else {
-                    System.out.println(Arrays.toString(transformedMatrix[k]) + ": Not a valid formation.");
-                }
-
-                // Is the formation attached to the ceiling ( ex. 1 0 0 0 )
-            } else if ((formation & ceilingMask) != 0) {
-
-                while ((formation & ceilingMask) != 0) {
-                    formation = (formation << 1) & bitDepth; // apply the bitDepth Mask to chop off higher bits
-                }
-                if ((formation | 0) == 0) {
-                    System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to Ceiling.");
-                } else {
-                    System.out.println(Arrays.toString(transformedMatrix[k]) + ": Not a valid formation.");
-                }
-
-                // possible column (attached to both)
-            } else if ((formation & 0b1001) != 0) {
-                System.out.println(Arrays.toString(transformedMatrix[k]) + ": Attached to both Floor and Ceiling.");
-
-            } else
-                System.out.println(Arrays.toString(transformedMatrix[k]) + ": Not a valid formation.");
+    public static String cap(char[] s){
+        char[] result = new char[s.length];
+        for (int i=0; i < s.length; i++){
+            char c = s[i];
+                result[i] = (char) (c & 0b1011111);
         }
-
+        return String.valueOf(result);
+       
     }
 
     public static int[][] transpose(int[][] matrix) {
