@@ -30,20 +30,19 @@ public class ReinforcementClass {
         // array needs to be sorted
         Arrays.sort(a);
         System.out.println(Arrays.toString(a));
-        System.out.println("index of binary search(55) : " + binarySearch(a, 55, 0, a.length - 1));
+        System.out.println("index of binary search(55) : " + binarySearchRecurse(a, 55, 0, a.length - 1));
+        System.out.println("index of binary search(55) : " + binarySearchIterate(a, 55));
 
-
-        System.out.println( cap("hello world!".toCharArray()) );
     }
 
-    public static String cap(char[] s){
+    public static String cap(char[] s) {
         char[] result = new char[s.length];
-        for (int i=0; i < s.length; i++){
+        for (int i = 0; i < s.length; i++) {
             char c = s[i];
-                result[i] = (char) (c & 0b1011111);
+            result[i] = (char) (c & 0b1011111);
         }
         return String.valueOf(result);
-       
+
     }
 
     public static int[][] transpose(int[][] matrix) {
@@ -150,7 +149,29 @@ public class ReinforcementClass {
 
     }
 
-    public static int binarySearch(int[] data, int target, int low, int high) {
+    /**Iterates through array to find match */
+    public static int binarySearchIterate(int[] data, int target) {
+
+        int left = 0;
+        int right = data.length - 1;
+
+        while (left <= right) {
+            int mid = left + (right - left) / 2;
+            if (data[mid] == target) {
+                return mid;
+            } else if (data[mid] < target) {
+                left = mid + 1;
+                
+            } else {
+                right = mid - 1;
+            }
+
+        }
+        return -1; // no match found
+
+    }
+    /**Recursively calls function to find match. */
+    public static int binarySearchRecurse(int[] data, int target, int low, int high) {
         if (low > high) {
             return -1;
         } else {
@@ -158,9 +179,9 @@ public class ReinforcementClass {
             if (target == data[mid])
                 return mid;
             else if (target < data[mid])
-                return binarySearch(data, target, low, mid - 1);
+                return binarySearchRecurse(data, target, low, mid - 1);
             else
-                return binarySearch(data, target, mid + 1, high);
+                return binarySearchRecurse(data, target, mid + 1, high);
         }
     }
 
