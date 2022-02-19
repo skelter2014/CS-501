@@ -22,6 +22,9 @@ public class HighScoreList<E> {
             }
         }
         highScore.printList();
+        highScore.list.removeNode(4);
+        highScore.list.removeNode(3);
+        highScore.printList();
 
 
 

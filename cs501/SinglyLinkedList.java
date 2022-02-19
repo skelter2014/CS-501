@@ -37,7 +37,8 @@ public class SinglyLinkedList<E> {
             if (pointer.getNext() == tail) {
                 removeLastNode();
             } else {
-                pointer.setNext(null);
+                Node<E> nextNode = pointer.getNext().getNext();
+                pointer.setNext(nextNode);
             }
             size--;
         }
