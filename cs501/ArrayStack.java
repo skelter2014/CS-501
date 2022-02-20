@@ -3,7 +3,7 @@ package cs501;
 import java.util.Arrays;
 
 public class ArrayStack<E> implements StackInterface<E> {
-    private static final int CAPACITY = 10;
+    private static final int CAPACITY =20;
     private E[] data;
     private int t = -1; // starting index is negative 1
 
@@ -19,6 +19,28 @@ public class ArrayStack<E> implements StackInterface<E> {
             a[i] = stack.pop();
         }
         System.out.println(Arrays.toString(a));
+
+
+        System.out.println("isMatched: " + isMatched("(a+(b*c){a-c}[a]+[b]*d)"));
+    }
+
+    public static boolean isMatched(String expression){
+        final String opening = "({[";
+        final String closing = ")}]";
+
+        ArrayStack<Character> buffer = new ArrayStack<>();
+        for (char c: expression.toCharArray()){
+            if (opening.indexOf(c) != -1){
+                buffer.push(c);
+            }
+            else if (closing.indexOf(c)!= -1){
+                if (buffer.isEmpty()) {return false;}
+                if (closing.indexOf(c) != opening.indexOf(buffer.pop())){
+                    return false;
+                }
+            }
+        }
+        return buffer.isEmpty();
     }
 
     public ArrayStack() {

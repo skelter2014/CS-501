@@ -4,19 +4,18 @@ public class HighScoreList<E> {
 
     SinglyLinkedList<GameEntry> list;
 
-
     public static void main(String[] args) {
 
         HighScoreList<Integer> highScore = new HighScoreList<>();
 
-        int[] a = new int[] { 1,10,2,9,8,3,7,4,5,6,3  };
+        int[] a = new int[] { 1, 10, 2, 9, 8, 3, 7, 4, 5, 6, 3 };
         highScore.list = new SinglyLinkedList<>();
 
         for (int i : a) {
 
-            GameEntry entry = new GameEntry("Score_"+i, i);
-            if (i % 2 == 0){
-                highScore.addNewScore( entry);
+            GameEntry entry = new GameEntry("Score_" + i, i);
+            if (i % 2 == 0) {
+                highScore.addNewScore(entry);
             } else {
                 highScore.addNewScore(entry);
             }
@@ -26,12 +25,10 @@ public class HighScoreList<E> {
         highScore.list.removeNode(3);
         highScore.printList();
 
-
-
-
     }
+
     /** Iterate the entire list and print the scores */
-        public void printList() {
+    public void printList() {
         if (list.isEmpty()) {
             System.out.println("\n------------------[Empty list]--------------------------\n");
         } else {
@@ -47,20 +44,20 @@ public class HighScoreList<E> {
 
     }
 
-    
-        /** Adds a new score node to the list in the proper DEC SORTED position */
+    /** Adds a new score node to the list in the proper DEC SORTED position */
     public void addNewScore(GameEntry entry) {
 
         Node<GameEntry> pointer = list.first();
         // pointer = list.head;
-        int ptrScore = pointer != null ? ((GameEntry)pointer.getElement()).score : 0;
+        int ptrScore = pointer != null ? ((GameEntry) pointer.getElement()).score : 0;
 
         // is list empty or is it bigger than head? just add to head
         if (list.isEmpty() || entry.score > ptrScore) {
-            list.addFirst( entry) ;
+            list.addFirst(entry);
         } else {
             // find the spot to insert
-            while (pointer != list.last().getNext() && entry.score < ((GameEntry)pointer.getNext().getElement()).score) {
+            while (pointer != list.last().getNext() &&
+                    entry.score < ((GameEntry) pointer.getNext().getElement()).score) {
                 pointer = pointer.getNext();
             }
 
@@ -75,21 +72,23 @@ public class HighScoreList<E> {
             list.removeLastNode();
         }
     }
-    
+
     // public static void printList(SinglyLinkedList<GameEntry> list) {
-    //     if (list.isEmpty()) {
-    //         System.out.println("\n------------------[Empty list]--------------------------\n");
-    //     } else {
-    //         System.out.println("--------------------------------------------------------");
-    //         System.out.print("head: " + list.head.element + "\ttail: " + list.tail.element + "\n");
-    //         System.out.println("--------------------------------------------------------");
-    //         Node<GameEntry> pointer = list.first();
-    //         pointer = list.head;
-    //         while (pointer != null) {
-    //             System.out.println(pointer.getElement() + " ");
-    //             pointer = pointer.getNext();
-    //         }
-    //     }
+    // if (list.isEmpty()) {
+    // System.out.println("\n------------------[Empty
+    // list]--------------------------\n");
+    // } else {
+    // System.out.println("--------------------------------------------------------");
+    // System.out.print("head: " + list.head.element + "\ttail: " +
+    // list.tail.element + "\n");
+    // System.out.println("--------------------------------------------------------");
+    // Node<GameEntry> pointer = list.first();
+    // pointer = list.head;
+    // while (pointer != null) {
+    // System.out.println(pointer.getElement() + " ");
+    // pointer = pointer.getNext();
+    // }
+    // }
 
     // }
 
@@ -128,6 +127,4 @@ public class HighScoreList<E> {
         }
     }
 
-
-    
 }

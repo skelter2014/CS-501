@@ -99,9 +99,6 @@ public class SinglyLinkedList<E> {
 
     /** Add score directly to end of list. Does not ensure proper ordering */
     public void addLast(E e) {
-        if (size == 10) {
-            throw new UnsupportedOperationException("List already has MAX elements.");
-        }
         Node<E> newest = new Node<>(e, null);
         if (isEmpty()) {
             head = newest;
