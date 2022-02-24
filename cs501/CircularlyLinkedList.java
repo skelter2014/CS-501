@@ -1,5 +1,7 @@
 package cs501;
 
+import cs501.assignments.Node;
+
 public class CircularlyLinkedList<E> {
     private Node<E> tail = null;
     private int size = 0;
@@ -7,25 +9,35 @@ public class CircularlyLinkedList<E> {
     public static void main(String[] args) {
         CircularlyLinkedList<Integer> list = new CircularlyLinkedList<>();
 
-        for (int i = 0; i <= 3; i++) {
-            list.addLast(i * i);
+        for (int i = 0; i <= 50; i++) {
+            list.addFirst(i+i);
         }
 
         System.out.println("-------------------------------");
         list.printList();
-        list.rotate();
+        System.out.println("-------------------------------");
+        while (list.size > 1) {
+            for (int j = 0; j < 7; j++) {
+                list.rotate();
+            }
+            list.removeFirst();
+            list.printList();
+        }
+
         System.out.println("-------------------------------");
         list.printList();
+        System.out.println("-------------------------------");
     }
 
     public void printList() {
         Node<E> pointer = tail.getNext();
 
         while (pointer != tail) {
-            System.out.println(pointer.getElement());
+            System.out.print(pointer.getElement()+ " ");
             pointer = pointer.getNext();
         }
-        System.out.println(pointer.getElement());
+        System.out.print(pointer.getElement());
+        System.out.println("\n");
 
     }
 

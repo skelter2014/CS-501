@@ -1,4 +1,4 @@
-package cs501;
+package cs501.assignments;
 import java.util.Random;
 
 /** A basic doubly linked list */

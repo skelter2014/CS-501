@@ -2,6 +2,8 @@ package cs501;
 
 import java.util.Arrays;
 
+import cs501.interfaces.StackInterface;
+
 public class ArrayStack<E> implements StackInterface<E> {
     private static final int CAPACITY =20;
     private E[] data;

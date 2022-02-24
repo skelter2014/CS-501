@@ -2,6 +2,9 @@ package cs501;
 
 import java.util.Arrays;
 
+import cs501.assignments.SinglyLinkedList;
+import cs501.interfaces.StackInterface;
+
 public class LinkedListStack<E> implements StackInterface<E> {
 
     private SinglyLinkedList<E> list;

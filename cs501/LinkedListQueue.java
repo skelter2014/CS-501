@@ -1,5 +1,8 @@
 package cs501;
 
+import cs501.assignments.SinglyLinkedList;
+import cs501.interfaces.QueueInterface;
+
 public class LinkedListQueue<E> implements QueueInterface<E> {
 
     public static void main(String[] args){
@@ -26,9 +29,6 @@ public class LinkedListQueue<E> implements QueueInterface<E> {
         queue.enqueue("one");
         queue.enqueue("two");
         queue.enqueue("three");
-        queue.enqueue("four");
-        queue.enqueue("five");
-        queue.enqueue("six");
 
         while (queue.isEmpty() == false){
             System.out.print(queue.dequeue()+ " ");

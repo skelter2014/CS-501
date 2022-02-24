@@ -1,14 +1,9 @@
 package cs501;
 
-public interface QueueInterface<E> {
-    int size();
-    boolean isEmpty();
-    void enqueue(E e);
-    E first();
-    E dequeue();
-}
+import cs501.interfaces.QueueInterface;
 
-class ArrayQueue<E> implements QueueInterface<E> {
+public class ArrayQueue<E> implements QueueInterface<E> {
+
     private static final int CAPACITY = 10;
     private E[] data;
     private int f = 0;
@@ -38,9 +33,11 @@ class ArrayQueue<E> implements QueueInterface<E> {
         queue.enqueue("one");
         queue.enqueue("two");
         queue.enqueue("three");
-        queue.enqueue("four");
-        queue.enqueue("five");
-        queue.enqueue("six");
+
+        while (queue.isEmpty() == false) {
+            System.out.print(queue.dequeue()+ " ");
+
+        }
 
     }
 
@@ -62,8 +59,9 @@ class ArrayQueue<E> implements QueueInterface<E> {
 
     public void enqueue(E e) throws IllegalStateException {
         if (sz == data.length) {
-            throw new IllegalStateException("Stack is full.");
+            throw new IllegalStateException("Queue is full.");
         }
+        // This is the important part. The modulo wraps the
         int avail = (f + sz) % data.length;
         data[avail] = e;
         sz++;

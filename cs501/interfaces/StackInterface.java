@@ -1,4 +1,4 @@
-package cs501;
+package cs501.interfaces;
 
 public interface StackInterface<E> {
     int size();
