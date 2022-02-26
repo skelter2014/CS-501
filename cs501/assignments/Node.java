@@ -1,4 +1,4 @@
-package cs501.assignments;
+
 
     // nested Node Class
     public class Node<E> {

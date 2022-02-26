@@ -1,4 +1,4 @@
-package cs501.assignments;
+
 
 public class SinglyLinkedList<E> {
 

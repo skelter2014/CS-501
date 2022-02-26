@@ -1,4 +1,3 @@
-package cs501.assignments;
 
 public class HighScoreList<E> {
 
