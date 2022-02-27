@@ -1,6 +1,6 @@
 package cs501;
 
-import cs501.assignments.SinglyLinkedList;
+
 import cs501.interfaces.QueueInterface;
 
 public class LinkedListQueue<E> implements QueueInterface<E> {

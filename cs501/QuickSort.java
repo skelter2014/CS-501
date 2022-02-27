@@ -21,8 +21,8 @@ public class QuickSort {
 
         ArrayList<Integer> a = new ArrayList<>();
         Random rnd = new Random();
-        for (int i = 0; i < 1024; i++) {
-            Integer next = rnd.nextInt(2048);
+        for (int i = 0; i < 128; i++) {
+            Integer next = rnd.nextInt(128);
             if (!a.contains(next)) {
                 a.add(next);
             }

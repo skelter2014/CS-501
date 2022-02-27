@@ -1,5 +1,9 @@
 {
     "files.exclude": {
         "**/.class": true
-    }
+    },
+    "java.project.sourcePaths": [
+        "cs501/assignments",
+        ""
+    ]
 }

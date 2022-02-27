@@ -1,10 +1,11 @@
-import java.util.Stack;
-
 /**
- * A two ended queue that functions as a double stack to hold Color objects. Red
- * objects
- * are pushed to the left side (front) of the queue and Blue objects are pushed
- * to the right side(end) of the queue.
+ * Assignment 2
+* Design an ADT for a two-color, double-stack ADT that consists of two stacks— one red 
+* and one blue — and has as its operations color-coded versions of the regular stack ADT operations. 
+* For example, this ADT should support both a redPush operation and a bluePush operation. 
+* Give an efficient implementation of this ADT using a single array whose capacity is set at some value N 
+* that is assumed to always be larger than the sizes of the red and blue stacks combined;
+* Chapter 6, project 37.
  */
 public class RedBlueDoubleStack<E> implements RedBlueStackInterface<E> {
 
@@ -16,7 +17,7 @@ public class RedBlueDoubleStack<E> implements RedBlueStackInterface<E> {
     private int blueSize = 0;
     private int redSize = 0;
 
-    /** Test a double sided stack */
+    /** Driver method to Test a double sided stack */
     public static void main(String args[]) {
         RedBlueDoubleStack<StackColor> stack = new RedBlueDoubleStack<>();
 
@@ -35,38 +36,81 @@ public class RedBlueDoubleStack<E> implements RedBlueStackInterface<E> {
 
         stack.printStack();
 
+        System.out.println("\t\t<<-Pop 4 Red. >>Push 4 Blue.");
+        stack.popRed();
+        stack.popRed();
+        stack.popRed();
+        stack.popRed();
+        stack.pushBlue(new StackColor(Color.Blue));
+        stack.pushBlue(new StackColor(Color.Blue));
+        stack.pushBlue(new StackColor(Color.Blue));
+        stack.pushBlue(new StackColor(Color.Blue));
+        stack.printStack();
+        System.out.println("\t\t<<Pop 4 Red ");
+        stack.popRed();
+        stack.popRed();
+        stack.popRed();
+        stack.popRed();
+        stack.printStack();
+
+        System.out.println("\t\t---Create New Stack ---");
+        stack = new RedBlueDoubleStack<>();
+        System.out.println("\t\t>>Push 1 Blue ---");
+
+        stack.pushBlue(new StackColor(Color.Blue));
+        stack.printStack();
+        System.out.println("\t\t>>Push 1 Red");
+        stack.pushRed(new StackColor(Color.Red));
+        stack.printStack();
+
+        System.out.println("\t\tTest both top functions.");
+        System.out.println("\t\t\tRed Top: " +stack.topRed() + " Blue Top: " + stack.topBlue());
+
+        System.out.println("\n\t\t<<Pop 1 Blue; <<Pop 1 Red");
         stack.popBlue();
         stack.popRed();
+        stack.printStack();
 
-        stack.printStack();
-        stack.popBlue();
-        stack.popBlue();
-        stack.popBlue();
-        stack.printStack();
+
+        System.out.println("\t\tPush Wrong Color to Stack - <<Should Throw Exception>>");
+        try{
+        stack.pushBlue(new StackColor(Color.Red));
+        }catch (IllegalStateException e){
+            System.out.println("\t\tCaptured expected Exception: " + e);
+        }
+
+
 
     }
 
+    /**A method to display a visual representation of the double stack ADT */
     private void printStack() {
         System.out.println("----------------------------------------");
+        System.out.println("---------------------------");
         System.out.println("Total Stack Size:\t" + size());
         System.out.println("Red Stack Size:  \t" + redSize);
         System.out.println("Blue Stack Size: \t" + blueSize);
-        System.out.println("----------------------------------------");
+        System.out.println("---------------------------");
 
         if (redSize > 0) {
             for (int i = 0; i < redSize; i++) {
                 // E[] d = stack.data;
                 StackColor c = (StackColor) data[i];
-                System.out.println(c);
+                System.out.println( c );
             }
+        } else {
+            System.out.println("[empty]");
         }
-        System.out.println("------top------");
+        System.out.println("-------red stack top------");
+        System.out.println("-------blue stack top-----");
 
         if (blueSize > 0) {
             for (int j = data.length - blueSize; j < data.length; j++) {
                 StackColor c = (StackColor) data[j];
-                System.out.println(c);
+                System.out.println( c );
             }
+        } else {
+            System.out.println("[empty]");
         }
     }
 
@@ -113,11 +157,13 @@ public class RedBlueDoubleStack<E> implements RedBlueStackInterface<E> {
 
             E[] temp = (E[]) new Object[newSize];
 
+            //Copy any red tokens
             if (redSize > 0) {
                 for (int i = 0; i < redSize; i++) {
                     temp[i] = data[i];
                 }
             }
+            //copy any blue tokens.
             if (blueSize > 0) {
                 for (int j = data.length - blueSize; j < data.length; j++) {
                     temp[j + newSize / 2] = data[j];

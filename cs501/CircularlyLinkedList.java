@@ -1,6 +1,6 @@
 package cs501;
 
-import cs501.assignments.Node;
+
 
 public class CircularlyLinkedList<E> {
     private Node<E> tail = null;
@@ -9,7 +9,7 @@ public class CircularlyLinkedList<E> {
     public static void main(String[] args) {
         CircularlyLinkedList<Integer> list = new CircularlyLinkedList<>();
 
-        for (int i = 0; i <= 50; i++) {
+        for (int i = 0; i <= 10; i++) {
             list.addFirst(i+i);
         }
 

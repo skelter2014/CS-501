@@ -1,0 +1,98 @@
+----------------------------------------
+---------------------------
+Total Stack Size:	12
+Red Stack Size:  	8
+Blue Stack Size: 	4
+---------------------------
+[Red]	000
+[Red]	002
+[Red]	003
+[Red]	005
+[Red]	007
+[Red]	009
+[Red]	010
+[Red]	011
+-------red stack top------
+-------blue stack top-----
+[Blue]	008
+[Blue]	006
+[Blue]	004
+[Blue]	001
+		<<-Pop 4 Red. >>Push 4 Blue.
+----------------------------------------
+---------------------------
+Total Stack Size:	12
+Red Stack Size:  	4
+Blue Stack Size: 	8
+---------------------------
+[Red]	000
+[Red]	002
+[Red]	003
+[Red]	005
+-------red stack top------
+-------blue stack top-----
+[Blue]	015
+[Blue]	014
+[Blue]	013
+[Blue]	012
+[Blue]	008
+[Blue]	006
+[Blue]	004
+[Blue]	001
+		<<Pop 4 Red 
+----------------------------------------
+---------------------------
+Total Stack Size:	8
+Red Stack Size:  	0
+Blue Stack Size: 	8
+---------------------------
+[empty]
+-------red stack top------
+-------blue stack top-----
+[Blue]	015
+[Blue]	014
+[Blue]	013
+[Blue]	012
+[Blue]	008
+[Blue]	006
+[Blue]	004
+[Blue]	001
+		---Create New Stack ---
+		>>Push 1 Blue ---
+----------------------------------------
+---------------------------
+Total Stack Size:	1
+Red Stack Size:  	0
+Blue Stack Size: 	1
+---------------------------
+[empty]
+-------red stack top------
+-------blue stack top-----
+[Blue]	016
+		>>Push 1 Red
+----------------------------------------
+---------------------------
+Total Stack Size:	2
+Red Stack Size:  	1
+Blue Stack Size: 	1
+---------------------------
+[Red]	017
+-------red stack top------
+-------blue stack top-----
+[Blue]	016
+		Test both top functions.
+			Red Top: [Red]	017 Blue Top: [Blue]	016
+
+		<<Pop 1 Blue; <<Pop 1 Red
+----------------------------------------
+---------------------------
+Total Stack Size:	0
+Red Stack Size:  	0
+Blue Stack Size: 	0
+---------------------------
+[empty]
+-------red stack top------
+-------blue stack top-----
+[empty]
+		Push Wrong Color to Stack - <<Should Throw Exception>>
+		Captured expected Exception: java.lang.IllegalStateException: Cannot push color to Blue Stack: Red
