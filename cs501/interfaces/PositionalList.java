@@ -10,18 +10,18 @@ public interface PositionalList<E> {
     /**Returns the last position in the list */
     Position<E> last();
     /**Returns the Position immediately before Position p */
-    Position<E> before(Position<E> p);
+    Position<E> before(Position<E> p) throws IllegalArgumentException;
     /**Returns the Position immediately after Position p */
-    Position<E> after(Position<E> p);
+    Position<E> after(Position<E> p) throws IllegalArgumentException ;
     /**Inserts element e at front of list */
     Position<E> addFirst(E e);
     /**Inserts element e at back of list */
     Position<E> addLast(E e);
     
-    Position<E> addBefore(Position<E> p, E e);
-    Position<E> addAfter(Position<E> p, E e);
-    E set(Position<E> p, E e);
-    E remove(Position<E> p);
+    Position<E> addBefore(Position<E> p, E e) throws IllegalArgumentException;
+    Position<E> addAfter(Position<E> p, E e) throws IllegalArgumentException;
+    E set(Position<E> p, E e) throws IllegalArgumentException;
+    E remove(Position<E> p) throws IllegalArgumentException;
 
 
     

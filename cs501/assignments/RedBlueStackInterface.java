@@ -38,8 +38,7 @@ enum Color {
 
 /**
  * A custom class the encapsulates a color object put on the stack. Uses an
- * internal enum
- * to enforce only accepted colors.
+ * internal enum to allow only accepted colors.
  */
 class StackColor {
 

@@ -5,5 +5,6 @@
     "java.project.sourcePaths": [
         "cs501/assignments",
         ""
-    ]
+    ],
+    "java.format.settings.url": ".vscode/java-formatter.xml"
 }
