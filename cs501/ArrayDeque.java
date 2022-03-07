@@ -1,12 +1,10 @@
 package cs501;
 
-import cs501.interfaces.DequeInterface;
-
 /**
  * Give a complete implementation of the Deque ADT using a fixed-capacity array,
  * so that each of the update methods runs in O(1) time.
  */
-public class ArrayDeque<E> implements DequeInterface<E> {
+public class ArrayDeque<E> implements cs501.interfaces.DequeInterface<E> {
    
     private E[] data;
     private int f = 0;
