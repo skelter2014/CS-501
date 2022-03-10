@@ -6,9 +6,9 @@
     "configurations": [
         {
             "type": "java",
-            "name": "Launch DoublyLinkedPositionList",
+            "name": "Launch LinkedBinaryTree",
             "request": "launch",
-            "mainClass": "cs501.DoublyLinkedPositionList",
+            "mainClass": "cs501.LinkedBinaryTree",
             "projectName": "Code_f799085d"
         },
         {
@@ -16,118 +16,6 @@
             "name": "Launch Current File",
             "request": "launch",
             "mainClass": "${file}"
-        },
-        {
-            "type": "java",
-            "name": "Launch ArrayDeque",
-            "request": "launch",
-            "mainClass": "ArrayDeque",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch CaveFormations",
-            "request": "launch",
-            "mainClass": "CaveFormations",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch CreditCard",
-            "request": "launch",
-            "mainClass": "CreditCard",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch DoublyLinkedList",
-            "request": "launch",
-            "mainClass": "DoublyLinkedList",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch HighScoreList",
-            "request": "launch",
-            "mainClass": "HighScoreList",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch RedBlueDoubleStack",
-            "request": "launch",
-            "mainClass": "RedBlueDoubleStack",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch ReinforcementClass",
-            "request": "launch",
-            "mainClass": "ReinforcementClass",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch ArrayDeque(1)",
-            "request": "launch",
-            "mainClass": "cs501.ArrayDeque",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch ArrayQueue",
-            "request": "launch",
-            "mainClass": "cs501.ArrayQueue",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch ArrayStack",
-            "request": "launch",
-            "mainClass": "cs501.ArrayStack",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch CircularlyLinkedList",
-            "request": "launch",
-            "mainClass": "cs501.CircularlyLinkedList",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch LinkedListQueue",
-            "request": "launch",
-            "mainClass": "cs501.LinkedListQueue",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch LinkedListStack",
-            "request": "launch",
-            "mainClass": "cs501.LinkedListStack",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch MergeSort",
-            "request": "launch",
-            "mainClass": "cs501.MergeSort",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch QuickSort",
-            "request": "launch",
-            "mainClass": "cs501.QuickSort",
-            "projectName": "Code_f799085d"
-        },
-        {
-            "type": "java",
-            "name": "Launch RecursiveRuler",
-            "request": "launch",
-            "mainClass": "cs501.RecursiveRuler",
-            "projectName": "Code_f799085d"
         }
     ]
 }
