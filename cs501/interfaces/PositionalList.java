@@ -1,5 +1,7 @@
 package cs501.interfaces;
 
+import java.util.Iterator;
+
 public interface PositionalList<E> {
     /**Returns number of elements in list */
     int size();
@@ -22,6 +24,8 @@ public interface PositionalList<E> {
     Position<E> addAfter(Position<E> p, E e) throws IllegalArgumentException;
     E set(Position<E> p, E e) throws IllegalArgumentException;
     E remove(Position<E> p) throws IllegalArgumentException;
+    Iterable <Position<E>> positions();
+    Iterator<E> iterator();
 
 
     

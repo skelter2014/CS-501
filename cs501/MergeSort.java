@@ -2,7 +2,19 @@ package cs501;
 
 import java.util.Arrays;
 import java.util.Comparator;
+import java.util.IntSummaryStatistics;
 
+
+/**
+* 1. DIVIDE: If S has zero or one element, return S immediately; it is already
+* sorted. Otherwise (S has at least two elements), remove all the elements
+* from S and put them into two sequences, S1 and S2, each containing about
+* half of the elements of S; that is, S1 contains the first ⌊n/2⌋ elements of S,
+* and S2 contains the remaining ⌈n/2⌉ elements.
+* 2. CONQUER: Recursively sort sequences S1 and S2.
+* 3. COMBINE: Put the elements back into S by merging the sorted sequences S1
+* and S2 into a sorted sequence.
+ */
 public class MergeSort {
 
     public static void main(String[] args) {
@@ -10,9 +22,13 @@ public class MergeSort {
         MergeSort sorter = new MergeSort();
         Integer[] a;
         Integer[] b;
+        Integer[] c;
 
-        a = new Integer[]{5,10,4,9,3};
-        b = new Integer[]{8,2,7,6,1};
+        a = new Integer[]{5,9,7,3,1};
+        b = new Integer[]{8,2,6,4,10};
+        c = new Integer[]{22,45,34,56,12,37,23,44,19};
+
+
 
         Comparator<Integer> comp = new Comparator<Integer>() {
             @Override
@@ -22,14 +38,23 @@ public class MergeSort {
 
         };
 
+        //Calling the merge function separately partially combines the 2 arrays - calling
+        //it again has no effect. - splitting this into 2 halves and merging again
+        //has no effect because it only compares a/b. You need to split each sub array
+        //in half so that it compares a to a and b to b
         Integer[] result = new Integer[10];
         merge(a, b, result, comp);
-
+        System.out.print(Arrays.toString(a));
+        System.out.println(" " + Arrays.toString(b));
         System.out.println(Arrays.toString(result));
 
-        Integer[] result2 = mergeSort(result, comp);
+        
 
+        //Correct usage of merge sort. call with an array and a comparator.
+        Integer[] result2 = mergeSort(result, comp);
         System.out.println(Arrays.toString(mergeSort(result2, comp)));
+        System.out.println(Arrays.toString(mergeSort(c, comp)));
+
 
     };
 

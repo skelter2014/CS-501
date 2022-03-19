@@ -6,6 +6,55 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch UnsortedPriorityQueue",
+            "request": "launch",
+            "mainClass": "cs501.UnsortedPriorityQueue",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch BinaryRecursion",
+            "request": "launch",
+            "mainClass": "cs501.BinaryRecursion",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch Factorial",
+            "request": "launch",
+            "mainClass": "cs501.Factorial",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch QuickSort",
+            "request": "launch",
+            "mainClass": "cs501.QuickSort",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch RedBlueDoubleStack",
+            "request": "launch",
+            "mainClass": "RedBlueDoubleStack",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch InsertionSort",
+            "request": "launch",
+            "mainClass": "cs501.InsertionSort",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch MergeSort",
+            "request": "launch",
+            "mainClass": "cs501.MergeSort",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
             "name": "Launch LinkedBinaryTree",
             "request": "launch",
             "mainClass": "cs501.LinkedBinaryTree",

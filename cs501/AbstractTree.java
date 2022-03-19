@@ -1,6 +1,8 @@
 package cs501;
 
+import cs501.LinkedBinaryTree.Node;
 import cs501.interfaces.Position;
+import cs501.interfaces.QueueInterface;
 import cs501.interfaces.TreeInterface;
 import java.util.ArrayList;
 import java.util.Iterator;
@@ -25,7 +27,7 @@ public abstract class AbstractTree<E> implements TreeInterface<E> {
   }
 
   /**Returns the height of subtree at Position p */
-  private int height(Position<E> p) {
+  public int height(Position<E> p) {
     int h = 0;
     for (Position<E> c : children(p)) {
       h = Math.max(h, 1 + height(c));
@@ -52,7 +54,7 @@ public abstract class AbstractTree<E> implements TreeInterface<E> {
     }
   }
 
-  public Iterator iterator() {
+  public Iterator<E> iterator() {
     return new ElementIterator();
   }
 
@@ -78,7 +80,7 @@ public abstract class AbstractTree<E> implements TreeInterface<E> {
   }
 
   private void preorderSubtree(Position<E> p, List<Position<E>> snapshot) {
-    snapshot.add(p);
+    snapshot.add(p); //Parent then Left Right
     for (Position<E> c : children(p)) {
       preorderSubtree(c, snapshot);
     }
@@ -96,14 +98,67 @@ public abstract class AbstractTree<E> implements TreeInterface<E> {
     for (Position<E> c : children(p)) {
       postOrderSubtree(c, snapshot);
     }
-    snapshot.add(p);
+    snapshot.add(p); //Children 1st, then parent.
   }
-  public Iterable<Position<E>> postorder(){
+
+  public Iterable<Position<E>> postorder() {
     List<Position<E>> snapshot = new ArrayList<>();
-    if (!isEmpty()){
+    if (!isEmpty()) {
       postOrderSubtree(root(), snapshot);
     }
     return snapshot;
+  }
 
+  private void printFringe(LinkedListQueue<Position<E>> queue) {
+    SinglyLinkedList<Position<E>> list = queue.getList();
+
+    cs501.Node<Position<E>> pos = list.first();
+    StringBuffer buf = new StringBuffer();
+
+    buf.append("< ");
+
+    while (pos != null) {
+      buf.append(pos.getElement().getElement() + " ");
+      pos = pos.getNext();
+    }
+    buf.append(">");
+    while (buf.length() < 16) {
+      buf.append(" ");
+    }
+    System.out.print(buf.toString());
+  }
+
+  private void printSnapShot(List<Position<E>> list) {
+    System.out.print("[ ");
+    for (Position<E> e : list) {
+      System.out.print(e.getElement() + " ");
+    }
+    System.out.println("]");
+  }
+
+  public Iterable<Position<E>> breadthFirst() {
+    List<Position<E>> snapshot = new ArrayList<>();
+    if (!isEmpty()) {
+      QueueInterface<Position<E>> fringe = new LinkedListQueue<>();
+
+      fringe.enqueue(root());
+      printFringe((LinkedListQueue<Position<E>>) fringe);
+      printSnapShot(snapshot);
+      while (!fringe.isEmpty()) {
+        Position<E> p = fringe.dequeue();
+        snapshot.add(p);
+
+        printFringe((LinkedListQueue<Position<E>>) fringe);
+        printSnapShot(snapshot);
+
+        for (Position<E> c : children(p)) {
+          fringe.enqueue(c);
+          printFringe((LinkedListQueue<Position<E>>) fringe);
+          printSnapShot(snapshot);
+        }
+      }
+      System.out.println("--------------");
+    }
+    return snapshot;
   }
 }

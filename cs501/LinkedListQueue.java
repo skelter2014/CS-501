@@ -44,6 +44,11 @@ public class LinkedListQueue<E> implements QueueInterface<E> {
         return list.size();
     }
 
+    //return the underlying list implementation.
+    protected SinglyLinkedList<E> getList() {
+        return list;
+    }
+
     public boolean isEmpty() {
         return list.isEmpty();
     }
