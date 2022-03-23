@@ -45,13 +45,13 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
 
 
      p1 = tree.addLeft(root, 2);
-    // p2 = tree.addRight(root, 3);
-    // p3 =  tree.addLeft(p1, 4);
-    // p4 = tree.addRight(p1, 5);
-    // tree.addLeft(p2, 6);
-    // tree.addRight(p2, 7);
-    // lefty = tree.addLeft(p3, 8);
-    tree.addNode(root, 0, tree);
+    p2 = tree.addRight(root, 3);
+    p3 =  tree.addLeft(p1, 4);
+    p4 = tree.addRight(p1, 5);
+    tree.addLeft(p2, 6);
+    tree.addRight(p2, 7);
+    lefty = tree.addLeft(p3, 8);
+    //tree.addNode(root, 0, tree);
 
     //int b = LinkedBinaryTree.countNodes(4);
 

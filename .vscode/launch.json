@@ -6,6 +6,20 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ReinforcementClass",
+            "request": "launch",
+            "mainClass": "ReinforcementClass",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch UnsortedTableMap",
+            "request": "launch",
+            "mainClass": "cs501.UnsortedTableMap",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
             "name": "Launch ArrayList",
             "request": "launch",
             "mainClass": "cs501.ArrayList",

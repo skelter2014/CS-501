@@ -51,6 +51,10 @@ public class ArrayList<E> implements List<E> {
     return e;
   }
 
+  //Provide method to add a new entry to end of list.
+  public void add(E e){
+    add(size(),e);
+  }
   public void add(int i, E e) {
     if (size == data.length) {
       throw new IllegalStateException("array is full.");

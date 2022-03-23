@@ -28,7 +28,7 @@ public class UnsortedPriorityQueue<K, V> extends AbstractPriortyQueue<K, V> {
     Random rnd = new Random();
 
 
-    for (int i = 0; i < 20000; i++) {
+    for (int i = 0; i < 25; i++) {
         int v = rnd.nextInt(999);
         queue.insert(v, "value_"+ v);
     }
@@ -58,26 +58,26 @@ public class UnsortedPriorityQueue<K, V> extends AbstractPriortyQueue<K, V> {
 
 
 
-    // //Use Positions()
-    // System.out.println("Positions() method.");
-    // for (Position<Entry<Integer, String>> p : queue.list.positions()) {
-    //   key = p.getElement().getKey();
-    //   value = p.getElement().getValue();
-    //   System.out.println("\t" + key + " : " + value);
-    // }
-    // //Use Iterator method
+    //Use Positions()
+    System.out.println("Positions() method.");
+    for (Position<Entry<Integer, String>> p : queue.list.positions()) {
+      key = p.getElement().getKey();
+      value = p.getElement().getValue();
+      System.out.println("\t" + key + " : " + value);
+    }
+    //Use Iterator method
 
-    // Iterator iter = queue.list.iterator();
-    // System.out.println("iterator() method.");
-    // while(iter.hasNext()) {
-    //     Entry<Integer, String> p = (Entry<Integer, String>) iter.next();
+    Iterator iter = queue.list.iterator();
+    System.out.println("iterator() method.");
+    while(iter.hasNext()) {
+        Entry<Integer, String> p = (Entry<Integer, String>) iter.next();
 
-    //     System.out.print("\t" + p.getKey()); System.out.println(" : "+ p.getValue());
-    //     // key = ((Position<Entry<String, String>>) p).getElement().getKey();
-    //     // value = ((Position<Entry<String, String>>) p).getElement().getValue();
-    //     // System.out.println("iterator() method.");
-    //     // System.out.println("key: " + key + " value: " + value);
-    //   }
+        System.out.print("\t" + p.getKey()); System.out.println(" : "+ p.getValue());
+        // key = ((Position<Entry<String, String>>) p).getElement().getKey();
+        // value = ((Position<Entry<String, String>>) p).getElement().getValue();
+        // System.out.println("iterator() method.");
+        // System.out.println("key: " + key + " value: " + value);
+      }
   }
 
   private Position<Entry<K, V>> findMin() {

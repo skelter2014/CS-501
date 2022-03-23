@@ -16,6 +16,16 @@ public class ReinforcementClass {
         ReinforcementClass tester = new ReinforcementClass();
         // tester.inputAllBaseTypes();
 
+        int[] akey = new int[100];
+        int seed = 200;
+
+        for (int i=0; i < 100; i++){
+            akey[i] = seed+=5;
+        }
+        for (int i=0; i< akey.length; i++){
+            System.out.println(akey[i] % 100);
+        }
+
         System.out.println("Number 3 is odd: " + ReinforcementClass.isOdd(3));
         System.out.println("Number 4 is odd: " + ReinforcementClass.isOdd(4));
 

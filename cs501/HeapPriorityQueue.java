@@ -18,28 +18,74 @@ public class HeapPriorityQueue<K, V> extends AbstractPriortyQueue<K, V> {
         HeapPriorityQueue<Integer, String> heap = new HeapPriorityQueue<>();
         // heap.insert(8, "buckle");
         heap.insert(7, "seven");
-        heap.insert(3, "three");
         heap.insert(1, "one");
-        heap.insert(2, "two");
-        heap.insert(5, "five");
-        heap.insert(4, "four");
         heap.insert(6, "six");
+        heap.insert(2, "two");
+        heap.insert(4, "four");
+        heap.insert(3, "three");
+        heap.insert(5, "five");
+
+
+        //-972458019
+        int hashA = heap.hashCode();
+
 
         while (heap.isEmpty() == false) {
             Entry<Integer, String> value = heap.removeMin();
             System.out.println(value.getValue());
-            //PUT IT back in the array
-            
         }
+
+        System.out.println("------heapify-----------");
+
+
+        Integer[] keys = new Integer[]{6,3,1,2,5,4,7};
+        String[] values = new String[]{"six","three","one","two","five","four","seven"};
+
+        heap = new HeapPriorityQueue<>(keys, values);
+        //-1071917151
+        int hashB = heap.hashCode();
+
+        while (heap.isEmpty() == false) {
+            Entry<Integer, String> value = heap.removeMin();
+            System.out.println(value.getValue());
+        }
+
+        System.out.println(hashA == hashB);
     }
 
+    public int hashCode(){
+        ArrayList<Entry<K, V>> list = this.arrayList;
+        int h = 0;
+        for (int i=0; i < list.size(); i++){
+            Entry<K,V> entry = list.get(i);
+            h ^= entry.hashCode();
+            h = (h<<5)|(h>>>27);
+        }
+        return h;
+
+
+    }
 
     protected ArrayList<Entry<K, V>> arrayList = new ArrayList<>();
 
     //@formatter:off
     HeapPriorityQueue() { super(); }
     HeapPriorityQueue(Comparator<K> comp) { super(comp); }
+    HeapPriorityQueue(K[] keys, V[] values){
+        super();
+        for (int j=0; j < Math.min(keys.length, values.length); j++){
+            add(new PQEntry<>(keys[j], values[j]));
+        }
+        heapify();
+    }
 
+    protected void heapify() {
+        int startIndex = parent(size() - 1);
+        for (int j=startIndex; j >= 0; j--){
+            downHeap(j);
+        }
+
+    }
     // utilities
     protected int left(int j) { return (2 * j) + 1; }
     protected int parent(int j) { return (j - 1) / 2; }
@@ -51,6 +97,13 @@ public class HeapPriorityQueue<K, V> extends AbstractPriortyQueue<K, V> {
         Entry<K, V> temp = arrayList.get(i);
         arrayList.set(i, arrayList.get(j));
         arrayList.set(j, temp);
+    }
+
+    //Adds to the end of the heap.
+    private Entry<K,V> add(Entry<K,V> entry){
+        checkKey(entry.getKey());
+        arrayList.add(arrayList.size(), entry);
+        return entry;
     }
 
     protected void upHeap(int j) {
