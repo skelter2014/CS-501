@@ -1,0 +1,58 @@
+--------------------------------------------------
+        Scenario #1 - Add @ Front of List
+        Scenario #2 - Add @ Middle of List
+        Scenario #3 - Add @ End of List
+--------------------------------------------------
+N: 256
+Scenario #1      Number of internal moves: 32640
+                 total time in ns: 802300
+Scenario #2      Number of internal moves: 16384
+                 total time in ns: 262800
+Scenario #3      Number of internal moves: 0
+                 total time in ns: 58300
+--------------------------------------------------
+N: 512
+Scenario #1      Number of internal moves: 130816
+                 total time in ns: 546100
+Scenario #2      Number of internal moves: 65536
+                 total time in ns: 347400
+Scenario #3      Number of internal moves: 0
+                 total time in ns: 95100
+--------------------------------------------------
+N: 1024
+Scenario #1      Number of internal moves: 523776
+                 total time in ns: 4192700
+Scenario #2      Number of internal moves: 262144
+                 total time in ns: 1475000
+Scenario #3      Number of internal moves: 0
+                 total time in ns: 205700
+
+
+
+This implementation utilizes a counter which increments each time an array element is moved. This 
+counter recognizes that the data move itself occurs in O(1) time so the running time is largely a function
+of n.
+
+      data[k + 1] = data[k]; // shift element to the right.
+      counter++; // Assume that this takes O(1) for each iteration so increment the counter;
+
+
+for various value of N, the results are largely the same. Scenario #3 where the new value is inserted at the 
+end of the list is the quickest and produces the fewest internal moves within the array (0). Because the new element
+is inserted at the end, there is no time spent moving existing elements within the array. Scenario #2
+where the element is inserted in the middle of the array moves 1/2 of the elements. Scenario #1 performed
+the worst by far. Each element (except for the 1st insertion) required all of the existing elements
+to be shifted by 1. This is reflected both in the running time and the move counter.
+
+Observations on # of moves between scenarios - regardless of size of n
+	Scenario #1 - # of moves is ~ (n/2)^2   * 2 
+	Scenario #2 - # of moves is  (n/2) ^ 2 
+	Scenario #3 - # of moves is zero
+
+Observations on running time	
+	Scenario #3 runs approx 60% faster than Scenario #2 
+	Scenario #3 runs approx 90% faster than Scenario #1
+	Scenario #2 runs approx 40% faster than Scenario #1.
+	Scenario #1 performs the worst.
+
+

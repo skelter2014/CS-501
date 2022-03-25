@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch ArrayList",
+            "request": "launch",
+            "mainClass": "ArrayList",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
             "name": "Launch ReinforcementClass",
             "request": "launch",
             "mainClass": "ReinforcementClass",
