@@ -60,7 +60,7 @@ public class ArrayList<E> implements List<E> {
       throw new IllegalStateException("array is full.");
     }
     for (int k = size - 1; k >= i; k--) {
-      data[k + 1] = data[k]; // shift to the right.
+      data[k + 1] = data[k]; // shift to the right. Assume that this taks O(1) for each iteration
     }
     data[i] = e;
     size++;

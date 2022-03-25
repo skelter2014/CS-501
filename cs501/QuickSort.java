@@ -56,9 +56,9 @@ public class QuickSort {
         K pivot = (K) S.get(n - 1);
         // System.out.println("pivot: " + pivot);
 
-        ArrayList<K> L = new ArrayList<>();
-        ArrayList<K> E = new ArrayList<>();
-        ArrayList<K> G = new ArrayList<>();
+            ArrayList<K> L = new ArrayList<>();
+            ArrayList<K> E = new ArrayList<>();
+            ArrayList<K> G = new ArrayList<>();
 
         int k = 0;
         while (S.isEmpty() != true) {
