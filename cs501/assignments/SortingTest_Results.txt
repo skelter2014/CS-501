@@ -1,0 +1,92 @@
+Experiment with 100,000 data elements 
+
+-------------------------------------------------------------
+## Unsorted Data ##
+[ 739 482 787 622 180  ... 302 236 715 875 700 ]
+Method:   Selection 	Elapsed time (s): 1.5746857
+Method:   Merge 	    Elapsed time (s): .0177204
+Method:   Insertion 	Elapsed time (s): 1.9174388
+Method:   QuickSort 	Elapsed time (s): .013835
+-------------------------------------------------------------
+%% Almost Sorted Data (ASC) %%
+[ 0 0 0 0 0  ... 110 515 111 484 195 ]
+Method:   Selection 	Elapsed time (s): 1.5555729
+Method:   Merge 	    Elapsed time (s): .0084284
+Method:   Insertion 	Elapsed time (s): .0613067
+Method:   QuickSort 	Elapsed time (s): .0032498
+
+The three methods were run with 100,000 data elements for two different scenarios. The first scenario, the data was
+chosen randomly and placed in the test array. The same data was then 99% sorted ascending using the Arrays utility and then 
+the last 1000 elements were randomly selected again to produced an 'almost sorted' scenario. All of the sort algorithms produced
+faster sorting times with the selection sort which did not show any significant decrease in sorting time.
+
+the most significant change was to the insertion sort which showed a 96% decrease which is due to the fact that the 
+inner loop is bypassed 
+
+
+
+Change in sorting times after sorting 90% of the array.
+
+Selection Sort  : no significant change
+Merge Sort      : 52.4367% decrease
+Insertion       : 96.8027% decrease
+QuickSort       : 76.5103% decrease
+
+
+----------------------------------------------------------------------------------------------
+Further Analysis using smaller data set (100 elements)
+
+Another analysis of the algorithms is to run them with much a much smaller data set (100 elements) and count the number
+of times a primitive operation is executed in each method. Using a smaller dataset helped to illustrate the relation
+of the operations to the dataset (n). The test was run again with both a random and a mostly sorted algorithm with 
+the following results:
+
+The number of operations decreased with all of the algorithms when it was partially sorted EXCEPT for the Merge sort which
+performed the exact same number of operations (1344) (as counted at various points in the code). I did not expect this.
+
+The Selection sort reduced the number of operations by roughly 50%. The Insertion sort saw almost 90% decrease in operations and 
+the Quicksort operations fell by roughly 87.5%. - The Merge implementation used in this experiment saw NO reduction in operations
+count when partially sorting the data. 
+
+## Unsorted Data ##
+[ 516 18 467 590 636  ... 64 576 332 689 834 ]
+Method:   Selection     
+                        Number of operations: 409
+Method:   Merge         
+                        Number of operations: 1,344
+Method:   Insertion     
+                        Number of operations: 2,555
+Method:   QuickSort     
+                        Number of operations: 422
+-------------------------------------------------------------
+%% Almost Sorted Data (ASC) %%
+[ 4 15 18 64 79  ... 933 957 987 490 100 ]
+Method:   Selection     
+                        Number of operations: 216
+Method:   Merge         
+                        Number of operations: 1,344
+Method:   Insertion     
+                        Number of operations: 248
+Method:   QuickSort     
+                        Number of operations: 51
+
+
+
+As one final test, I reversed the order of the 100 element array and ran the sorting again with the following results:
+As expected, the number of operations increased for all of the sorting Methods EXCEPT the merge sort, which stayed the
+same again. I did not expect this at all. I was sure that reversing the order would result in some change in the
+number of operations in the Merge sort. What these results tell me is the the makeup of the data in the Merge sort
+is not related to the speed of the sort - it will execute the same number of primitive operations which IS related to the
+number of data elements (n). 
+
+-------------------------------------------------------------
+%% Almost Sorted Data (DESC) %%
+[ 11 17 26 50 50  ... 976 981 993 210 478 ]
+Method:   Selection     
+                        Number of operations: 2,373
+Method:   Merge         
+                        Number of operations: 1,344
+Method:   Insertion     
+                        Number of operations: 4,909
+Method:   QuickSort     
+                        Number of operations: 660

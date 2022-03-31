@@ -142,19 +142,19 @@ public abstract class AbstractTree<E> implements TreeInterface<E> {
       QueueInterface<Position<E>> fringe = new LinkedListQueue<>();
 
       fringe.enqueue(root());
-      printFringe((LinkedListQueue<Position<E>>) fringe);
-      printSnapShot(snapshot);
+      //printFringe((LinkedListQueue<Position<E>>) fringe);
+      //printSnapShot(snapshot);
       while (!fringe.isEmpty()) {
         Position<E> p = fringe.dequeue();
         snapshot.add(p);
 
-        printFringe((LinkedListQueue<Position<E>>) fringe);
-        printSnapShot(snapshot);
+        //printFringe((LinkedListQueue<Position<E>>) fringe);
+        //printSnapShot(snapshot);
 
         for (Position<E> c : children(p)) {
           fringe.enqueue(c);
-          printFringe((LinkedListQueue<Position<E>>) fringe);
-          printSnapShot(snapshot);
+          //printFringe((LinkedListQueue<Position<E>>) fringe);
+          //printSnapShot(snapshot);
         }
       }
       System.out.println("--------------");

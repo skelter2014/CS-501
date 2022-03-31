@@ -1,0 +1,25 @@
+-------------------------------------------------------------
+## Unsorted Data ##
+[ 962 386 780 313 368  ... 242 850 313 77 796 ]
+Method:   Selection 	Elapsed time (s): 1.6259403
+Method:   Merge 	    Elapsed time (s): .0163896
+Method:   Insertion 	Elapsed time (s): 2.0310443
+Method:   QuickSort     Elapsed time (s): .0100244
+-------------------------------------------------------------
+%% Almost Sorted Data (ASC) %%
+[ 0 0 0 0 0  ... 735 255 468 930 892 ]
+Method:   Selection 	Elapsed time (s): 1.5589419
+Method:   Merge 	    Elapsed time (s): .0084074
+Method:   Insertion 	Elapsed time (s): .0590399
+Method:   QuickSort     Elapsed time (s): .0085438
+
+
+When sending mostly sorted data through each algorith, the speed of each algorithm
+was improved as follows:
+
+Selection:      4.12059% decrease
+Merge:          48.7028% decrease
+Insertion:      97.0931% decrease
+QuickSort:      14.77% decrease
+
+

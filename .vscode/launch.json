@@ -6,6 +6,97 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch QuickSort_Inplace_2",
+            "request": "launch",
+            "mainClass": "QuickSort_Inplace_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch QuickSort_Inplace_2",
+            "request": "launch",
+            "mainClass": "cs501.QuickSort_Inplace_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch MergeSort_2",
+            "request": "launch",
+            "mainClass": "MergeSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch SelectionSort_2",
+            "request": "launch",
+            "mainClass": "SelectionSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch InsertionSort_2",
+            "request": "launch",
+            "mainClass": "InsertionSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch QuickSort_2",
+            "request": "launch",
+            "mainClass": "QuickSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch SortingTestDriver",
+            "request": "launch",
+            "mainClass": "SortingTestDriver",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch SelectionSort_2",
+            "request": "launch",
+            "mainClass": "cs501.SelectionSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch QuickSort_2",
+            "request": "launch",
+            "mainClass": "cs501.QuickSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch InsertionSort_2",
+            "request": "launch",
+            "mainClass": "cs501.InsertionSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch MergeSort_2",
+            "request": "launch",
+            "mainClass": "cs501.MergeSort_2",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch SortingTestDriver",
+            "request": "launch",
+            "mainClass": "cs501.SortingTestDriver",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch SelectionSort",
+            "request": "launch",
+            "mainClass": "cs501.SelectionSort",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
             "name": "Launch ArrayList",
             "request": "launch",
             "mainClass": "ArrayList",
