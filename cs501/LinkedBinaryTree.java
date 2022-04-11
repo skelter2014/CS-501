@@ -38,16 +38,8 @@ public class LinkedBinaryTree<E> extends AbstractBinaryTree<E> {
     Position<Object> N;
     
 /**
-Pre order           A K M R N O S L C D P Q
-inorder             M R K S O N A C L P D Q
-
-
-                 A
-     		   	K			        	L
-        M       N       C      D
-          R    O             P    Q
-              S  
-
+Pre order           -A- -K- [M R] [N O S] -L- [C] [D P Q]       (root, left, right)
+inorder             [M R] -K- [S O N] -A- [C] -L- [P D Q]    (left, root, right)
  */
 
     tree.count++;
@@ -64,6 +56,14 @@ inorder             M R K S O N A C L P D Q
     S = tree.addLeft(O,'S');
     P = tree.addLeft(D,'P');//
     Q = tree.addRight(D, 'Q');//
+
+    /**
+     *                                     A
+     *                            K              L
+     *                      M         N      C      D 
+     *                        R     O             P   Q 
+     *                            S
+     */
 
     // lefty = tree.addLeft(p3, 8);
 
