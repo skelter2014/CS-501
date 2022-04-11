@@ -6,6 +6,13 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch BinaryTreeBuilder",
+            "request": "launch",
+            "mainClass": "cs501.BinaryTreeBuilder",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
             "name": "Launch QuickSort_Inplace_2",
             "request": "launch",
             "mainClass": "QuickSort_Inplace_2",

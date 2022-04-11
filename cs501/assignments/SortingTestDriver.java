@@ -69,7 +69,7 @@ public class SortingTestDriver {
 
         int[] b = reverse(a);
 
-        printPartial(a);
+        printPartial(b);
 
         testSort(Arrays.copyOf(b, b.length), SortMethod.Selection);
         testSort(Arrays.copyOf(b, b.length), SortMethod.Merge);
