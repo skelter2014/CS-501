@@ -1,3 +1,4 @@
+import cs501.Node;
 
 public class HighScoreList<E> {
 
@@ -34,7 +35,7 @@ public class HighScoreList<E> {
             System.out.println("--------------------------------------------------------");
             System.out.print("head: " + list.first().getElement() + "\ttail: " + list.last().getElement() + "\n");
             System.out.println("--------------------------------------------------------");
-            Node<GameEntry> pointer = list.first();
+            Node<HighScoreList.GameEntry> pointer = list.first();
             while (pointer != null) {
                 System.out.println(pointer.getElement() + " ");
                 pointer = pointer.getNext();

@@ -1,5 +1,7 @@
 
 
+
+
     // nested Node Class
     public class Node<E> {
         private E element;

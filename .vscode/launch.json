@@ -6,6 +6,34 @@
     "configurations": [
         {
             "type": "java",
+            "name": "Launch LinkedListQueue",
+            "request": "launch",
+            "mainClass": "cs501.LinkedListQueue",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch LinkedBinaryTree",
+            "request": "launch",
+            "mainClass": "LinkedBinaryTree",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch Assignment_5",
+            "request": "launch",
+            "mainClass": "Assignment_5",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
+            "name": "Launch ArrayStack",
+            "request": "launch",
+            "mainClass": "ArrayStack",
+            "projectName": "Code_f799085d"
+        },
+        {
+            "type": "java",
             "name": "Launch BinaryTreeBuilder",
             "request": "launch",
             "mainClass": "cs501.BinaryTreeBuilder",
